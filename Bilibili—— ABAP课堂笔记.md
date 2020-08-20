@@ -2,6 +2,57 @@
 
 ## 命名规则   
 
+```te
+MM:  【Material management】   物料
+
+SD:  【Sales and Distribution】销售、分销
+
+FICO:财务，成本
+
+HCM：人力资本管理
+```
+
+
+
+
+
+
+
+```XML
+
+
+<!-- mirrors
+   | This is a list of mirrors to be used in downloading artifacts from remote repositories.
+   |
+   | It works like this: a POM may declare a repository to use in resolving certain artifacts.
+   | However, this repository may have problems with heavy traffic at times, so people have mirrored
+   | it to several places.
+   |
+   | That repository definition will have a unique id, so we can create a mirror reference for that
+   | repository, to be used as an alternate download site. The mirror site will be the preferred
+   | server for that repository.
+   |-->
+  <mirrors>
+    <!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    <mirror>
+      <id>mirrorId</id>
+      <mirrorOf>repositoryId</mirrorOf>
+      <name>Human Readable Name for this Mirror.</name>
+      <url>http://my.repository.com/repo/path</url>
+    </mirror>
+     -->
+      
+      
+  </mirrors>
+
+```
+
+
+
 ```xml
 
 c. 全局变量 GXX_XXX
@@ -948,6 +999,20 @@ TEXT_SPLIT                                    字符串分割
 
 •下一屏
 
+链接：https://pan.baidu.com/s/1M-PItyox7--c-nhS1wL2sQ 
+提取码：1111
+
+
+
+
+
+
+
+
+
+链接：https://pan.baidu.com/s/1pzqWR7-D7aPPtwozwUPgAA 
+提取码：1111
+
 ​				–当前界面输出结束时出现的界面
 
 ​				–为空：程序结束
@@ -1303,9 +1368,21 @@ ENDMODULE.
 
 
 
+判断是否超过300字？ 字节数小于900即可 
+ i = 文件总长度 / 900 ，得到几份 ，进1 
+byte[] arr1 = new byte[900]
 
 
 
+影视？ 
+音频长度？
+
+
+图片？ 爬虫，两份txt，一份API识别，一份以符号分割还是几个字就分割？ 每句话提取
+
+
+SM04
+TH_POPUP
 
 ```
 
@@ -1368,6 +1445,20 @@ ENDMODULE.
 ​			–CALL TRANSACTION
 
 ​			–BATCH INPUT SESSION
+
+
+
+BDC 的执行方式
+
+1.前台 		A
+
+2.后台		N
+
+3.在处理过程中显示错误信息  E 
+
+
+
+
 
 ## 六、ALV概览
 
@@ -1795,7 +1886,7 @@ CONVERSION  负号前置
 
 VRM_SET_VALUSE  下拉框实现函数
 
-
+ALSM_EXCEL_TO_INTERNAL_TABLE     EXCEL上传函数  
 
 ### 七、程序执行顺序
 
@@ -2264,5 +2355,2989 @@ SPRO
 
 
 
+SAP四种用户出口的类型
+
+菜单出口
+
+屏幕出口
+
+功能模块出口
+
+表/结构出口
+
   
+
+应用类型
+
+1.业务检查
+
+2.界面增强
+
+3.不规则业务的处理
+
+4.搜索帮助的出口
+
+
+
+
+
+
+
+
+
+
+
+
+
+第一代增强： 基于源代码的增删查改，找包含有USEREXIT的程序名，需要权限申请
+
+第二代增强：
+
+```XML
+功能模块增强 
+子屏幕增强
+GUI STATUS功能码增强
+INCLUDE STRUCTURE增强
+```
+
+
+
+SMOD :查看增强组件
+
+CMOD:实现增强
+
+```xml
+1.cmod中创建一个project，添加所要使用的增强，激活目标Components
+2.在目标function module 中编写功能代码
+
+```
+
+
+
+Subscreens
+
+```xml
+1.cmod中创建一个project，添加所要使用的增强，激活目标Components
+2.通过SMOD 定位到目标程序，创建与其对应的屏幕号，屏幕属性为subscreen，编写功能代码
+
+```
+
+
+
+
+
+
+
+
+
+第三代增强：
+
+SE18 查看BADI
+
+SE19 为BADI接口创建一个实例，在里面实现需要增加的功能
+
+第四代增强：
+
+  
+
+## 十二、SAP常用接口
+
+
+
+WEBSERVICE
+
+ALE/IDOC
+
+RFC
+
+BAPI
+
+```tex
+常用bapi 
+
+
+MM 模块：
+BAPI_OBJCL_CREATE 		分类视图的创建
+BAPI_OBJCL_GETCLASSES    分类视图得到详细信息
+BAPI_MATERIAL_SAVEREPLICA 物料视图的扩充
+BAPI_GOODSMVT_CREATE		 创建物料凭证 注意表T158G可以决定goodsmvt_code
+BAPI_GOODSMVT_CANCEL 冲销物料凭证
+BAPI_PR_CREATE 创建PR
+BAPI_PO_CREATE1 创建PO
+BAPI_PO_CHANGE 修改PO和删除PO
+WS_REVERSE_GOODS_ISSUE 冲销交货单的过账发货
+BAPI_RESERVATION_CREATE1 创建预留
+BAPI_RESERVATION_CHANGE 修改和删除预留
+
+SD 模块
+BAPI_SALESORDER_CREATEFROMDAT2 创建销售订单
+SD_SALESDOCUMENT_CREATE 创建销售订单
+BAPI_OUTB_DELIVERY_CREATE_SLS 根据销售订单创建交货单
+BAPI_BILLINGDOC_CREATEMULTIPLE 创建发票，注意参数ref_doc_ca
+BAPI_SALESORDER_CHANGE 修改或者删除销售订单
+MB_CANCEL_GOODS_MOVEMENT 冲销交货单的过账发货
+ BAPI_BILLINGDOC_CANCEL 发票的冲销
+
+```
+
+
+
+
+
+
+
+
+
+![image-20200716162604947](C:\Users\Null\AppData\Roaming\Typora\typora-user-images\image-20200716162604947.png)
+
+
+
+MIDDLEWARE
+
+
+
+
+
+
+
+
+
+### SAP ABAP SQL查询分析器（ABAP动态SQL执行）ZSQLEXPLORER
+
+
+
+
+
+```tex
+  method ZII_SI_ZTSCMJF001_IN_ASYN~SI_ZTSCMJF001_IN_ASYN .
+*** **** INSERT IMPLEMENTATION HERE **** ***
+*"----------------------------------------------------------------------
+*"*"本地接口：
+*"  TABLES
+*"      PT_DATA STRUCTURE  ZTSCMJF001
+*"  EXCEPTIONS
+*"      GET_GUID_FAILED
+*"----------------------------------------------------------------------
+
+
+
+"----------------------------------------------------------------------
+
+  DATA: l_guid    TYPE ztscmjf001-guid,
+        l_fjposnr TYPE ztscmjf001-fjposnr,
+        l_xstim   TYPE ztscmjf001-xstim.
+
+  TYPES: BEGIN OF gty_data,
+          guid        TYPE ztscmjf001-guid,
+          fjposnr     TYPE ztscmjf001-fjposnr,
+          guid_wcs    TYPE ztscmjf001-guid_wcs,
+          fjposnr_wcs TYPE ztscmjf001-fjposnr_wcs,
+          wcsno       TYPE ztscmjf001-wcsno,
+          wcssn       TYPE ztscmjf001-wcssn,
+        END OF gty_data.
+  DATA: gt_data TYPE TABLE OF gty_data,
+        gs_data TYPE gty_data,
+        pt_data TYPE TABLE OF ZTSCMJF001,
+        ps_data TYPE ZTSCMJF001.
+
+  FIELD-SYMBOLS: <fs> TYPE ztscmjf001.
+
+  IF pt_data IS NOT INITIAL.
+*&锁定编号范围
+    CALL FUNCTION 'NUMBER_RANGE_ENQUEUE'
+      EXPORTING
+        object           = 'ZSCMJS0003'
+      EXCEPTIONS
+        foreign_lock     = 1
+        object_not_found = 2
+        system_failure   = 3
+        OTHERS           = 4.
+    IF sy-subrc EQ 0.
+      CALL FUNCTION 'NUMBER_GET_NEXT'
+        EXPORTING
+          nr_range_nr             = '00'
+          object                  = 'ZSCMJS0003'
+        IMPORTING
+          number                  = l_guid
+        EXCEPTIONS
+          interval_not_found      = 1
+          number_range_not_intern = 2
+          object_not_found        = 3
+          quantity_is_0           = 4
+          quantity_is_not_1       = 5
+          interval_overflow       = 6
+          buffer_overflow         = 7
+          OTHERS                  = 8.
+      IF sy-subrc NE 0.
+       RAISE get_guid_failed.
+      ENDIF.
+*&解锁编号范围
+      CALL FUNCTION 'NUMBER_RANGE_DEQUEUE'
+        EXPORTING
+          object = 'ZSCMJS0003'.
+    ELSE.
+      "RAISE get_guid_failed.
+    ENDIF.
+
+    SELECT guid fjposnr guid_wcs fjposnr_wcs wcsno wcssn
+      INTO TABLE gt_data
+      FROM ztscmjf001
+      FOR ALL ENTRIES IN pt_data
+      WHERE wcsno EQ pt_data-wcsno
+        AND wcssn EQ pt_data-wcssn.
+    SORT gt_data BY wcsno   wcssn.
+
+    l_xstim = sy-datum && sy-uzeit.
+    LOOP AT pt_data ASSIGNING <fs>.
+      TRANSLATE <fs>-zywlx TO UPPER CASE.
+      TRANSLATE <fs>-zzfhf TO UPPER CASE.
+      TRANSLATE <fs>-zzshf TO UPPER CASE.
+      TRANSLATE <fs>-zcarnum TO UPPER CASE.
+      TRANSLATE <fs>-vkbur TO UPPER CASE.
+      TRANSLATE <fs>-wcsno TO UPPER CASE.
+      TRANSLATE <fs>-auart TO UPPER CASE.
+      TRANSLATE <fs>-zhcbs TO UPPER CASE. "MODIFY LIC 20190221
+
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        EXPORTING
+          input  = <fs>-vbeln
+        IMPORTING
+          output = <fs>-vbeln.
+
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        EXPORTING
+          input  = <fs>-posnr
+        IMPORTING
+          output = <fs>-posnr.
+
+      CALL FUNCTION 'CONVERSION_EXIT_MATN1_INPUT'
+        EXPORTING
+          input  = <fs>-matnr
+        IMPORTING
+          output = <fs>-matnr.
+
+      <fs>-guid_wcs    = <fs>-guid.
+      <fs>-fjposnr_wcs = <fs>-fjposnr.
+      CLEAR: <fs>-guid,<fs>-fjposnr.
+      SHIFT <fs>-zzfhf LEFT DELETING LEADING '0'.
+      "---如果不为销售则去前置0---
+      "---不为销售传的是门店,销售传的是小地址---
+      IF <fs>-zywlx NE 'WCS_SAP_107'.
+*        <fs>-zzshf = '0' && <fs>-zzshf.
+        SHIFT <fs>-zzshf LEFT DELETING LEADING '0'.
+      ENDIF.
+*      SHIFT <fs>-zzshf LEFT DELETING LEADING '0'.
+      SHIFT <fs>-vkbur LEFT DELETING LEADING '0'.
+
+      ADD 1 TO l_fjposnr.
+      <fs>-fjposnr = l_fjposnr.
+      <fs>-guid = l_guid.
+      <fs>-xstim = l_xstim.
+      READ TABLE gt_data TRANSPORTING NO FIELDS WITH KEY wcsno = <fs>-wcsno wcssn = <fs>-wcssn BINARY SEARCH.
+      IF sy-subrc EQ 0.
+        <fs>-loekz = 'X'.
+      ENDIF.
+    ENDLOOP.
+    MODIFY ztscmjf001 FROM TABLE pt_data.
+  ENDIF.
+
+
+
+
+
+
+
+
+
+
+
+  endmethod.
+```
+
+
+
+
+
+```tex
+  method ZII_SI_ZTSCMJH002_IN_ASYN~SI_ZTSCMJH002_IN_ASYN.
+*** **** INSERT IMPLEMENTATION HERE **** ***
+  
+  
+  
+  endmethod.
+
+
+```
+
+
+
+
+
+
+
+```XML
+
+*&---------------------------------------------------------------------*
+*& Report  ZDQT084
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zdqt084a.
+TABLES: ztdq075,t001l.
+TYPES: BEGIN OF ty_lgort_help,
+         werks TYPE t001l-werks,
+         lgort TYPE t001l-lgort,
+         lgobe TYPE t001l-lgobe,
+       END OF ty_lgort_help,
+       BEGIN OF ty_data,
+         sel   TYPE char1,
+         matnr TYPE ztdq075-matnr,
+         maktx TYPE makt-maktx,
+         werks TYPE ztdq075-werks,
+         name1 TYPE t001w-name1,
+         lgort TYPE ztdq075-lgort,
+         umlgo TYPE ztdq075-umlgo,
+         menge TYPE ztdq075-menge,
+       END OF ty_data,
+       BEGIN OF ty_alv,
+         send_text TYPE char10.
+        INCLUDE TYPE ztdq075.
+TYPES END OF ty_alv.
+DATA: gt_data TYPE STANDARD TABLE OF ty_data,
+      gw_data TYPE ty_data,
+      gt_alv  TYPE STANDARD TABLE OF ty_alv,
+      ok_code TYPE sy-ucomm.
+CONTROLS: tc_0100 TYPE TABLEVIEW USING SCREEN 0100.
+
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE text-b01.
+PARAMETERS: p1 RADIOBUTTON GROUP rg1 DEFAULT 'X' USER-COMMAND uc01,
+            p2 RADIOBUTTON GROUP rg1.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-b02.
+SELECT-OPTIONS: s_zyksq FOR ztdq075-zyksq MODIF ID m2,
+                s_matnr FOR ztdq075-matnr MODIF ID m2,
+                s_werks FOR ztdq075-werks MODIF ID m2.
+SELECTION-SCREEN END OF BLOCK b2.
+SELECTION-SCREEN END OF BLOCK b1.
+
+AT SELECTION-SCREEN OUTPUT.
+  IF p1 IS NOT INITIAL.
+    LOOP AT SCREEN.
+      IF screen-group1 EQ 'M2'.
+        screen-active = '0'.
+        MODIFY SCREEN.
+      ENDIF.
+    ENDLOOP.
+  ENDIF.
+
+START-OF-SELECTION.
+  CLEAR: gt_data,gw_data,ok_code.
+
+  CASE 'X'.
+    WHEN p1.
+      tc_0100-lines = 9999.
+      CALL SCREEN 0100.
+    WHEN p2.
+      PERFORM frm_alv.
+  ENDCASE.
+
+MODULE tc_0100_change_tc_attr OUTPUT.
+  SET PF-STATUS '100'.
+ENDMODULE.
+
+MODULE tc_0100_modify INPUT.
+  READ TABLE gt_data TRANSPORTING NO FIELDS INDEX tc_0100-current_line.
+  IF sy-subrc EQ 0.
+    MODIFY gt_data
+      FROM gw_data
+      INDEX tc_0100-current_line.
+  ELSE.
+    INSERT gw_data INTO gt_data INDEX tc_0100-current_line.
+  ENDIF.
+ENDMODULE.
+*&---------------------------------------------------------------------*
+*&      Module  USER_COMMAND_0100  INPUT
+*&---------------------------------------------------------------------*
+MODULE user_command_0100 INPUT.
+  CASE ok_code.
+    WHEN 'DELE'.
+      CLEAR ok_code.
+      DELETE gt_data WHERE sel IS NOT INITIAL.
+    WHEN 'SAVE'.
+      CLEAR ok_code.
+      PERFORM frm_save.
+    WHEN 'ALL'.
+      CLEAR ok_code.
+      PERFORM frm_select_row USING 'X'.
+    WHEN 'SAL'.
+      CLEAR ok_code.
+      PERFORM frm_select_row USING space.
+    WHEN '&F03' OR '&F15' OR '&F12'.
+      REFRESH CONTROL 'TC_0100' FROM SCREEN 0100.
+      LEAVE TO SCREEN 0.
+  ENDCASE.
+ENDMODULE.                 " USER_COMMAND_0100  INPUT
+*&---------------------------------------------------------------------*
+*&      Form  FRM_SAVE
+*&---------------------------------------------------------------------*
+
+FORM frm_save .
+  DATA: lw_dq075 TYPE ztdq075,
+        lt_dq075 TYPE STANDARD TABLE OF ztdq075,
+        lt_data  TYPE STANDARD TABLE OF ty_data,
+        lw_data  TYPE ty_data.
+  DATA: l_zyksq  TYPE ztdq075-zyksq,
+        l_pcname TYPE ztdq075-pcname,
+        l_ipaddr TYPE ztdq075-ipaddr.
+
+  lt_data[] = gt_data[].
+  DELETE lt_data WHERE matnr IS INITIAL OR werks IS INITIAL OR lgort IS INITIAL OR umlgo IS INITIAL OR menge IS INITIAL.
+  IF lt_data[] IS NOT INITIAL.
+    CALL FUNCTION 'NUMBER_RANGE_ENQUEUE'
+      EXPORTING
+        object           = 'ZDQ007'
+      EXCEPTIONS
+        foreign_lock     = 1
+        object_not_found = 2
+        system_failure   = 3.
+    IF sy-subrc EQ 0.
+      CALL FUNCTION 'NUMBER_GET_NEXT'
+        EXPORTING
+          nr_range_nr             = '00'
+          object                  = 'ZDQ007'
+        IMPORTING
+          number                  = l_zyksq
+        EXCEPTIONS
+          interval_not_found      = 1
+          number_range_not_intern = 2
+          object_not_found        = 3
+          quantity_is_0           = 4
+          quantity_is_not_1       = 5
+          interval_overflow       = 6
+          buffer_overflow         = 7
+          OTHERS                  = 8.
+
+      CALL FUNCTION 'NUMBER_RANGE_DEQUEUE'
+        EXPORTING
+          object           = 'ZDQ007'
+        EXCEPTIONS
+          object_not_found = 1.
+    ENDIF.
+
+    IF l_zyksq IS INITIAL.
+      MESSAGE '移库申请编号创建失败，请稍后重试' TYPE 'S' DISPLAY LIKE 'E'.
+    ELSE.
+      CALL FUNCTION 'TH_USER_INFO'
+        EXPORTING
+          client   = sy-mandt
+          user     = sy-uname
+        IMPORTING
+          terminal = l_pcname
+          addrstr  = l_ipaddr.
+
+      LOOP AT lt_data INTO lw_data.
+        MOVE-CORRESPONDING lw_data TO lw_dq075.
+        lw_dq075-zyksq = l_zyksq.
+        lw_dq075-posnr = sy-tabix.
+        lw_dq075-meins = 'EA'.
+        lw_dq075-pcname = l_pcname.
+        lw_dq075-ipaddr = l_ipaddr.
+        lw_dq075-erdat = sy-datum.
+        lw_dq075-erzet = sy-uzeit.
+        lw_dq075-ernam = sy-uname.
+        APPEND lw_dq075 TO lt_dq075.
+      ENDLOOP.
+      INSERT ztdq075 FROM TABLE lt_dq075.
+      COMMIT WORK AND WAIT.
+
+      PERFORM frm_send_to_wcs TABLES lt_dq075.
+      CLEAR: gt_data,gw_data,ok_code,lt_dq075,lt_data.
+*    REFRESH CONTROL 'TC_0100' FROM SCREEN 0100.
+    ENDIF.
+  ELSE.
+    MESSAGE '没有需要保存的有效数据，请改正后重新保存' TYPE 'S' DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_SAVE
+*&---------------------------------------------------------------------*
+*&      Module  TC_0100_SELECT  INPUT
+*&---------------------------------------------------------------------*
+MODULE tc_0100_select INPUT.
+
+ENDMODULE.                 " TC_0100_SELECT  INPUT
+*&---------------------------------------------------------------------*
+*&      Form  FRM_SELECT_ROW
+*&---------------------------------------------------------------------*
+FORM frm_select_row  USING p_sel.
+  FIELD-SYMBOLS <fs_data> TYPE ty_data.
+  LOOP AT gt_data ASSIGNING <fs_data>.
+    <fs_data>-sel = p_sel.
+  ENDLOOP.
+ENDFORM.                    " FRM_SELECT_ROW
+
+*&---------------------------------------------------------------------*
+*&      Module  TC_0100_CHECK  INPUT
+*&---------------------------------------------------------------------*
+MODULE tc_0100_check INPUT.
+  DATA: lw_data TYPE ty_data.
+  IF gw_data-matnr IS INITIAL.
+    MESSAGE '商品必填' TYPE 'E'.
+  ELSE.
+    SELECT SINGLE maktx
+      INTO gw_data-maktx
+      FROM makt
+      WHERE matnr EQ gw_data-matnr
+        AND spras EQ '1'.
+    IF sy-subrc NE 0.
+      MESSAGE e888(sabapdocu) WITH '商品' gw_data-matnr '不存在'.
+    ENDIF.
+  ENDIF.
+
+  IF gw_data-werks IS INITIAL.
+    MESSAGE '门店必填' TYPE 'E'.
+  ELSE.
+    IF gw_data-werks EQ 'Q012' OR gw_data-werks EQ 'D303' OR gw_data-werks EQ 'D304'.
+      SELECT SINGLE name1
+        INTO gw_data-name1
+        FROM t001w
+        WHERE werks EQ gw_data-werks.
+    ELSE.
+      MESSAGE '地点只能输入Q012或D303或D304' TYPE 'E'.
+    ENDIF.
+    IF gw_data-lgort IS INITIAL.
+      MESSAGE '移出库存地点必填' TYPE 'E'.
+    ELSE.
+      SELECT SINGLE * FROM t001l
+        WHERE werks EQ gw_data-werks
+          AND lgort EQ gw_data-lgort.
+      IF sy-subrc NE 0.
+        MESSAGE e888(sabapdocu) WITH '移出库存地点' gw_data-lgort '不属于地点' gw_data-werks.
+      ENDIF.
+    ENDIF.
+    IF gw_data-umlgo IS INITIAL.
+      MESSAGE '移入库存地点必填' TYPE 'E'.
+    ELSE.
+      SELECT SINGLE * FROM t001l
+        WHERE werks EQ gw_data-werks
+          AND lgort EQ gw_data-umlgo.
+      IF sy-subrc NE 0.
+        MESSAGE e888(sabapdocu) WITH '移入库存地点' gw_data-umlgo '不属于地点' gw_data-werks.
+      ENDIF.
+    ENDIF.
+    IF gw_data-lgort EQ gw_data-umlgo.
+      MESSAGE e888(sabapdocu) WITH '移入库存地点和移出库存地点不能相同'.
+    ENDIF.
+    IF gw_data-menge IS INITIAL.
+      MESSAGE '数量必填' TYPE 'E'.
+    ENDIF.
+  ENDIF.
+  READ TABLE gt_data TRANSPORTING NO FIELDS WITH KEY matnr = gw_data-matnr
+                                                     werks = gw_data-werks
+                                                     lgort = gw_data-lgort
+                                                     umlgo = gw_data-umlgo.
+  IF sy-subrc EQ 0.
+    MESSAGE '不允许重复数据' TYPE 'E'.
+  ENDIF.
+ENDMODULE.                 " TC_0100_CHECK  INPUT
+*&---------------------------------------------------------------------*
+*&      Module  TC_0100_LGORT_HELP  INPUT
+*&---------------------------------------------------------------------*
+MODULE tc_0100_lgort_help INPUT.
+  PERFORM frm_lgort_help USING 'LGORT'.
+ENDMODULE.                 " TC_0100_LGORT_HELP  INPUT
+*&---------------------------------------------------------------------*
+*&      Module  TC_0100_UMLGO_HELP  INPUT
+*&---------------------------------------------------------------------*
+MODULE tc_0100_umlgo_help INPUT.
+  PERFORM frm_lgort_help USING 'UMLGO'.
+ENDMODULE.                 " TC_0100_UMLGO_HELP  INPUT
+
+*&---------------------------------------------------------------------*
+*&      Form  FRM_LGORT_HELP
+*&---------------------------------------------------------------------*
+FORM frm_lgort_help USING p_field TYPE dfies-fieldname.
+  DATA: lt_lgort  TYPE STANDARD TABLE OF ty_lgort_help,
+        lw_lgort  TYPE ty_lgort_help,
+        lt_return TYPE STANDARD TABLE OF ddshretval,
+        lw_return TYPE ddshretval.
+  DATA: l_dynfield TYPE help_info-dynprofld.
+
+
+  SELECT werks lgort lgobe INTO TABLE lt_lgort
+    FROM t001l
+    WHERE werks IN ('D303','Q012','D304').
+  l_dynfield = 'GW_DATA-' && p_field.
+
+  CALL FUNCTION 'F4IF_INT_TABLE_VALUE_REQUEST'
+    EXPORTING
+      retfield        = p_field
+      dynpprog        = sy-repid
+      dynpnr          = sy-dynnr
+      dynprofield     = l_dynfield
+      value_org       = 'S'
+    TABLES
+      value_tab       = lt_lgort
+*     FIELD_TAB       =
+*     return_tab      = lt_return
+*     DYNPFLD_MAPPING =
+    EXCEPTIONS
+      parameter_error = 1
+      no_values_found = 2.
+ENDFORM.                    " FRM_LGORT_HELP
+*&---------------------------------------------------------------------*
+*&      Form  FRM_ALV
+*&---------------------------------------------------------------------*s
+FORM frm_alv .
+  DATA: lt_fcat    TYPE lvc_t_fcat,
+        ls_fcat    TYPE lvc_s_fcat,
+        ls_layo    TYPE lvc_s_layo,
+        ls_variant TYPE disvariant.
+  DATA: lr_tabdescr TYPE REF TO cl_abap_structdescr,
+        lr_data     TYPE REF TO data,
+        lt_dfies    TYPE ddfields,
+        ls_dfies    TYPE dfies.
+  DATA: lw_alv TYPE ty_alv.
+
+  SELECT * INTO CORRESPONDING FIELDS OF TABLE gt_alv
+    FROM ztdq075
+    WHERE zyksq IN s_zyksq
+      AND matnr IN s_matnr
+      AND werks IN s_werks.
+  LOOP AT gt_alv INTO lw_alv.
+    IF lw_alv-fsflg IS INITIAL.
+      lw_alv-send_text = '未发送'.
+    ELSE.
+      lw_alv-send_text = '已发送'.
+    ENDIF.
+    MODIFY gt_alv FROM lw_alv INDEX sy-tabix TRANSPORTING send_text.
+  ENDLOOP.
+
+**获取fieldcatalog
+  CREATE DATA lr_data LIKE LINE OF gt_alv.
+  lr_tabdescr ?= cl_abap_structdescr=>describe_by_data_ref( lr_data ).
+  lt_dfies = cl_salv_data_descr=>read_structdescr( lr_tabdescr ).
+  LOOP AT lt_dfies INTO ls_dfies.
+    CLEAR ls_fcat.
+    MOVE-CORRESPONDING ls_dfies TO ls_fcat.
+    IF ls_fcat-fieldname EQ 'LGORT'.
+      ls_fcat-scrtext_l = '移出库存地点'.
+    ENDIF.
+    IF ls_fcat-fieldname EQ 'UMLGO'.
+      ls_fcat-scrtext_l = '移入库存地点'.
+    ENDIF.
+    IF ls_fcat-fieldname EQ 'SEND_TEXT'.
+      ls_fcat-scrtext_l = '发送状态'.
+    ENDIF.
+    ls_fcat-coltext = ls_fcat-scrtext_l.
+    ls_fcat-reptext = ls_fcat-scrtext_l.
+    ls_fcat-scrtext_m = ls_fcat-scrtext_l.
+    ls_fcat-scrtext_s = ls_fcat-scrtext_l.
+    APPEND ls_fcat TO lt_fcat.
+  ENDLOOP.
+  DELETE lt_fcat WHERE fieldname EQ 'MEINS' OR fieldname EQ 'PCNAME' OR fieldname EQ 'IPADDR' OR fieldname EQ 'POSNR' OR fieldname EQ 'MANDT'.
+
+  ls_layo-cwidth_opt = 'X'.
+  ls_layo-zebra = 'X'.
+  ls_layo-sel_mode = 'A'.
+
+  ls_variant-report = sy-repid.
+  ls_variant-username = sy-uname.
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY_LVC'
+    EXPORTING
+      i_callback_program       = sy-repid
+      i_callback_pf_status_set = 'FRM_PF_STATUS'
+      i_callback_user_command  = 'FRM_USER_COMMAND'
+      is_layout_lvc            = ls_layo
+      it_fieldcat_lvc          = lt_fcat
+      i_default                = 'X'
+      i_save                   = 'A'
+      is_variant               = ls_variant
+    TABLES
+      t_outtab                 = gt_alv
+    EXCEPTIONS
+      program_error            = 1.
+ENDFORM.                    " FRM_ALV
+*&---------------------------------------------------------------------*
+*&      Module  TC_0100_SEL  INPUT
+*&---------------------------------------------------------------------*
+MODULE tc_0100_sel INPUT.
+  MODIFY gt_data FROM gw_data INDEX tc_0100-current_line TRANSPORTING sel.
+ENDMODULE.                 " TC_0100_SEL  INPUT
+*&---------------------------------------------------------------------*
+*&      Form  FRM_SEND_TO_WCS
+*&---------------------------------------------------------------------*
+FORM frm_send_to_wcs TABLES pt_data STRUCTURE ztdq075.
+  DATA: lr_proxy  TYPE REF TO zco_si_article_move_wcs_out_as,
+        ls_output TYPE zmt_article_move_wcs,
+        lw_header TYPE zdt_article_move_wcs_header.
+  DATA: lw_data TYPE ztdq075.
+
+  LOOP AT pt_data INTO lw_data.
+    MOVE: lw_data-zyksq TO lw_header-cbeln,
+          lw_data-werks TO lw_header-werks,
+          lw_data-matnr TO lw_header-matnr,
+          lw_data-menge TO lw_header-menge,
+          lw_data-lgort TO lw_header-logrt_01,
+          lw_data-umlgo TO lw_header-logrt,
+          lw_data-erdat TO lw_header-budat,
+          sy-datum      TO lw_header-erdat,
+          lw_data-ernam TO lw_header-xsusr,
+          lw_data-posnr TO lw_header-posnr.
+    APPEND lw_header TO ls_output-mt_article_move_wcs-header.
+    CLEAR: lw_header,lw_data.
+  ENDLOOP.
+  READ TABLE pt_data INTO lw_data INDEX 1.
+  TRY.
+      CREATE OBJECT lr_proxy.
+
+      CALL METHOD lr_proxy->si_article_move_wcs_out_asyn
+        EXPORTING
+          output = ls_output.
+
+      UPDATE ztdq075 SET fsflg = 'X' fsdat = sy-datum fszet = sy-uzeit fsnam = sy-uname
+        WHERE zyksq EQ lw_data-zyksq.
+
+      MESSAGE '移库申请保存成功，已发送WCS' TYPE 'S'.
+    CATCH cx_ai_system_fault .
+      UPDATE ztdq075 SET fsflg = space fsdat = sy-datum fszet = sy-uzeit fsnam = sy-uname
+        WHERE zyksq EQ lw_data-zyksq.
+      MESSAGE '移库申请发送WCS失败，请在查询报表中手工发送' TYPE 'I' DISPLAY LIKE 'E'.
+    CATCH cx_ai_application_fault.
+      UPDATE ztdq075 SET fsflg = space fsdat = sy-datum fszet = sy-uzeit fsnam = sy-uname
+        WHERE zyksq EQ lw_data-zyksq.
+      MESSAGE '移库申请发送WCS失败，请在查询报表中手工发送' TYPE 'I' DISPLAY LIKE 'E'.
+  ENDTRY.
+
+  COMMIT WORK AND WAIT.
+ENDFORM.                    " FRM_SEND_TO_WCS
+
+FORM frm_pf_status USING extab TYPE slis_t_extab.
+  SET PF-STATUS '1000' EXCLUDING extab.
+ENDFORM.
+
+FORM frm_user_command USING rf_ucomm    LIKE sy-ucomm
+                            rs_selfield TYPE slis_selfield.
+  CASE rf_ucomm.
+    WHEN 'SEND'.
+      PERFORM frm_send_to_pos.
+      rs_selfield-refresh ='X'.
+    WHEN OTHERS.
+  ENDCASE.
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_SEND_TO_POS
+*&---------------------------------------------------------------------*
+FORM frm_send_to_pos .
+
+  DATA: lr_proxy  TYPE REF TO zco_si_article_move_wcs_out_as,
+        ls_output TYPE zmt_article_move_wcs,
+        lw_header TYPE zdt_article_move_wcs_header.
+  DATA: lw_alv TYPE ty_alv.
+
+  LOOP AT gt_alv INTO lw_alv.
+    IF lw_alv-fsflg IS INITIAL.
+      MOVE: lw_alv-zyksq TO lw_header-cbeln,
+            lw_alv-werks TO lw_header-werks,
+            lw_alv-matnr TO lw_header-matnr,
+            lw_alv-menge TO lw_header-menge,
+            lw_alv-lgort TO lw_header-logrt_01,
+            lw_alv-umlgo TO lw_header-logrt,
+            lw_alv-erdat TO lw_header-budat,
+            sy-datum     TO lw_header-erdat,
+            lw_alv-ernam TO lw_header-xsusr,
+            lw_alv-posnr TO lw_header-posnr.
+      APPEND lw_header TO ls_output-mt_article_move_wcs-header.
+      CLEAR: lw_header,lw_alv.
+    ENDIF.
+  ENDLOOP.
+  IF ls_output-mt_article_move_wcs-header[] IS NOT INITIAL.
+    TRY.
+        CREATE OBJECT lr_proxy.
+
+        CALL METHOD lr_proxy->si_article_move_wcs_out_asyn
+          EXPORTING
+            output = ls_output.
+
+        LOOP AT gt_alv INTO lw_alv.
+          IF lw_alv-fsflg IS INITIAL.
+            lw_alv-fsflg = 'X'.
+            MODIFY gt_alv FROM lw_alv TRANSPORTING fsflg.
+            UPDATE ztdq075 SET fsflg = 'X' fsdat = sy-datum fszet = sy-uzeit fsnam = sy-uname
+              WHERE zyksq EQ lw_alv-zyksq AND posnr EQ lw_alv-posnr.
+          ENDIF.
+        ENDLOOP.
+
+      CATCH cx_ai_system_fault .
+      CATCH cx_ai_application_fault.
+    ENDTRY.
+    COMMIT WORK AND WAIT.
+  ELSE.
+    MESSAGE '没有需要发送WCS的数据' TYPE 'S' DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_SEND_TO_POS
+```
+
+
+
+
+
+```xml
+
+FUNCTION zscmjf_rfc_receive_wcs_doc.
+*"----------------------------------------------------------------------
+*"*"本地接口：
+*"  TABLES
+*"      PT_DATA STRUCTURE  ZTSCMJF001
+*"  EXCEPTIONS
+*"      GET_GUID_FAILED
+*"----------------------------------------------------------------------
+
+
+
+
+
+  DATA: l_guid    TYPE ztscmjf001-guid,
+        l_fjposnr TYPE ztscmjf001-fjposnr,
+        l_xstim   TYPE ztscmjf001-xstim.
+
+
+ type: BEGIN OF gty_data ,
+          guid        TYPE ztscmjf001-guid,
+          fjposnr     TYPE ztscmjf001-fjposnr,
+          guid_wcs    TYPE ztscmjf001-guid_wcs,
+          fjposnr_wcs TYPE ztscmjf001-fjposnr_wcs,
+          wcsno       TYPE ztscmjf001-wcsno,
+          wcssn       TYPE ztscmjf001-wcssn,
+        END OF gty_data.
+
+data: gt_data type table of gty_data,
+	 gs_out  type gty_data.
+data:pt_data type table of ZTSCMJF001,
+	PS_DATA TYPE ZTSCMJF001.
+DATA:LS_DATA TYPE ZDT_ZTSCMJF001_HEADER.
+
+   LOOP AT input-mt_MT_ZTSCMJF001-header INTO ls_data.
+      MOVE-CORRESPONDING ls_data TO PS_data.
+      APPEND ps_data TO pt_data.
+    ENDLOOP.
+
+
+
+
+
+
+
+
+
+
+  FIELD-SYMBOLS: <fs> TYPE ztscmjf001.
+
+  IF pt_data[] IS NOT INITIAL.
+*&锁定编号范围
+    CALL FUNCTION 'NUMBER_RANGE_ENQUEUE'
+      EXPORTING
+        object           = 'ZSCMJS0003'
+      EXCEPTIONS
+        foreign_lock     = 1
+        object_not_found = 2
+        system_failure   = 3
+        OTHERS           = 4.
+    IF sy-subrc EQ 0.
+      CALL FUNCTION 'NUMBER_GET_NEXT'
+        EXPORTING
+          nr_range_nr             = '00'
+          object                  = 'ZSCMJS0003'
+        IMPORTING
+          number                  = l_guid
+        EXCEPTIONS
+          interval_not_found      = 1
+          number_range_not_intern = 2
+          object_not_found        = 3
+          quantity_is_0           = 4
+          quantity_is_not_1       = 5
+          interval_overflow       = 6
+          buffer_overflow         = 7
+          OTHERS                  = 8.
+      IF sy-subrc NE 0.
+        RAISE get_guid_failed.
+      ENDIF.
+*&解锁编号范围
+      CALL FUNCTION 'NUMBER_RANGE_DEQUEUE'
+        EXPORTING
+          object = 'ZSCMJS0003'.
+    ELSE.
+      RAISE get_guid_failed.
+    ENDIF.
+
+    SELECT guid fjposnr guid_wcs fjposnr_wcs wcsno wcssn
+      INTO TABLE gt_data
+      FROM ztscmjf001
+      FOR ALL ENTRIES IN pt_data
+      WHERE wcsno EQ pt_data-wcsno
+        AND wcssn EQ pt_data-wcssn.
+    SORT gt_data BY wcsno   wcssn.
+
+    l_xstim = sy-datum && sy-uzeit.
+    LOOP AT pt_data ASSIGNING <fs>.
+      TRANSLATE <fs>-zywlx TO UPPER CASE.
+      TRANSLATE <fs>-zzfhf TO UPPER CASE.
+      TRANSLATE <fs>-zzshf TO UPPER CASE.
+      TRANSLATE <fs>-zcarnum TO UPPER CASE.
+      TRANSLATE <fs>-vkbur TO UPPER CASE.
+      TRANSLATE <fs>-wcsno TO UPPER CASE.
+      TRANSLATE <fs>-auart TO UPPER CASE.
+      TRANSLATE <fs>-zhcbs TO UPPER CASE. "MODIFY LIC 20190221
+
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        EXPORTING
+          input  = <fs>-vbeln
+        IMPORTING
+          output = <fs>-vbeln.
+
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+        EXPORTING
+          input  = <fs>-posnr
+        IMPORTING
+          output = <fs>-posnr.
+
+      CALL FUNCTION 'CONVERSION_EXIT_MATN1_INPUT'
+        EXPORTING
+          input  = <fs>-matnr
+        IMPORTING
+          output = <fs>-matnr.
+
+      <fs>-guid_wcs = <fs>-guid.
+      <fs>-fjposnr_wcs = <fs>-fjposnr.
+      CLEAR: <fs>-guid,<fs>-fjposnr.
+      SHIFT <fs>-zzfhf LEFT DELETING LEADING '0'.
+      "---如果不为销售则去前置0---
+      "---不为销售传的是门店,销售传的是小地址---
+      IF <fs>-zywlx NE 'WCS_SAP_107'.
+*        <fs>-zzshf = '0' && <fs>-zzshf.
+        SHIFT <fs>-zzshf LEFT DELETING LEADING '0'.
+      ENDIF.
+*      SHIFT <fs>-zzshf LEFT DELETING LEADING '0'.
+      SHIFT <fs>-vkbur LEFT DELETING LEADING '0'.
+
+      ADD 1 TO l_fjposnr.
+      <fs>-fjposnr = l_fjposnr.
+      <fs>-guid = l_guid.
+      <fs>-xstim = l_xstim.
+      READ TABLE gt_data TRANSPORTING NO FIELDS WITH KEY wcsno = <fs>-wcsno wcssn = <fs>-wcssn BINARY SEARCH.
+      IF sy-subrc EQ 0.
+        <fs>-loekz = 'X'.
+      ENDIF.
+    ENDLOOP.
+    MODIFY ztscmjf001 FROM TABLE pt_data.
+  ENDIF.
+ENDFUNCTION.
+
+
+```
+
+
+
+
+
+
+
+ZDMALL003A
+
+```tex
+*&---------------------------------------------------------------------*
+*& Report  ZDMALL003
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zdmall003a.
+
+TABLES:lfa1.
+
+TYPES: BEGIN OF ty_out,
+         lifnr  TYPE lfa1-lifnr, "供应商
+         name1  TYPE lfa1-name1, "名称
+         ktokk  TYPE lfa1-ktokk, "供商类型
+         fityp  TYPE lfa1-fityp, "税类型
+         stceg  TYPE lfa1-stceg, "税号
+         actss  TYPE lfa1-actss, "状态
+         zzjyfs TYPE lfa1-zzjyfs,
+         stras  TYPE lfa1-stras,
+         stelf1 TYPE lfa1-telf1,
+         stelf2 TYPE lfa1-telf2,
+         stelfx TYPE lfa1-telfx,
+         ekgrp  TYPE lfm1-ekgrp,  "经营范围
+         minbw  TYPE lfm1-minbw,
+         plifz  TYPE lfm1-plifz,
+         kalsk  TYPE lfm1-kalsk,
+         zterm  TYPE lfm1-zterm,
+         lname  TYPE knvk-name1, "联系人
+         telf1  TYPE knvk-telf1, "联系人电话
+         bankl  TYPE lfbk-bankl,
+         bankn  TYPE lfbk-bankn,
+         koinh  TYPE lfbk-koinh,
+         banka  TYPE bnka-banka,
+         brnch  TYPE char100,    " BNKA-STRAS && BNKA-BRNCH
+       END OF ty_out,
+       BEGIN OF ty_lfa1,
+         lifnr       TYPE lfa1-lifnr, "供应商
+         name1       TYPE lfa1-name1, "名称
+         ktokk       TYPE lfa1-ktokk, "供商类型
+         fityp       TYPE lfa1-fityp, "税类型
+         ekgrp       TYPE lfm1-ekgrp,  "经营范围
+         stceg       TYPE lfa1-stceg, "税号
+         actss       TYPE lfa1-actss, "状态
+         zzjyfs      TYPE lfa1-zzjyfs,
+         minbw       TYPE lfm1-minbw,
+         plifz       TYPE lfm1-plifz,
+         kalsk       TYPE lfm1-kalsk,
+         stras       TYPE lfa1-stras,
+         stelf1      TYPE lfa1-telf1,
+         stelf2      TYPE lfa1-telf2,
+         stelfx      TYPE lfa1-telfx,
+         zterm       TYPE lfm1-zterm,
+*         adrnr    TYPE lfa1-adrnr,
+         lfa1_key    TYPE cdhdr-objectid,
+*         adrc_key TYPE cdhdr-objectid,
+         nochange(1) TYPE c,
+       END OF ty_lfa1,
+       BEGIN OF ty_lfbk,
+         lifnr TYPE lfbk-lifnr,
+         bankl TYPE lfbk-bankl,
+         bankn TYPE lfbk-bankn,
+         koinh TYPE lfbk-koinh,
+*         lfbk_key TYPE cdhdr-objectid,
+       END OF ty_lfbk,
+       BEGIN OF ty_bnka,
+         banks       TYPE bnka-banks,
+         bankl       TYPE bnka-bankl,
+         banka       TYPE bnka-banka,
+         brnch       TYPE bnka-brnch,
+         stras       TYPE bnka-stras,
+         bnka_key    TYPE cdhdr-objectid,
+         nochange(1) TYPE c,
+       END OF ty_bnka,
+       BEGIN OF ty_knvk,
+         parnr TYPE knvk-parnr,
+         name1 TYPE knvk-name1,
+         telf1 TYPE knvk-telf1,
+         lifnr TYPE knvk-lifnr,
+       END OF ty_knvk,
+       BEGIN OF ty_cdhdr,
+         objectclas TYPE cdhdr-objectclas,
+         objectid   TYPE cdhdr-objectid,
+         changenr   TYPE cdhdr-changenr,
+       END OF ty_cdhdr.
+DATA:gt_out TYPE TABLE OF ty_out.
+
+*----------------------------------------------------------------------*
+* Selection Screen
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE text-b01.
+PARAMETERS: p_front RADIOBUTTON GROUP rg1 DEFAULT 'X' USER-COMMAND uc01,
+            p_back  RADIOBUTTON GROUP rg1.
+SELECTION-SCREEN END OF BLOCK b1.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-b02.
+PARAMETERS: p_udate TYPE cdhdr-udate.
+SELECTION-SCREEN SKIP 1.
+SELECT-OPTIONS : s_lifnr FOR lfa1-lifnr.
+SELECT-OPTIONS : s_ktokk FOR lfa1-ktokk DEFAULT 'Z002'.
+SELECTION-SCREEN END OF BLOCK b2.
+
+SELECTION-SCREEN BEGIN OF BLOCK b3 WITH FRAME TITLE text-b03.
+PARAMETERS: p_size TYPE int4 OBLIGATORY DEFAULT 10000.
+SELECTION-SCREEN END OF BLOCK b3.
+
+START-OF-SELECTION.
+  PERFORM frm_main.
+
+END-OF-SELECTION.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_MAIN
+*&---------------------------------------------------------------------*
+FORM frm_main .
+  DATA: lt_lfa1  TYPE STANDARD TABLE OF ty_lfa1,
+        lt_lfbk  TYPE STANDARD TABLE OF ty_lfbk,
+        lt_knvk  TYPE STANDARD TABLE OF ty_knvk,
+        lt_bnka  TYPE STANDARD TABLE OF ty_bnka,
+        lt_cdhdr TYPE STANDARD TABLE OF ty_cdhdr,
+        lw_out   TYPE ty_out.
+  DATA: l_udate TYPE sy-datum.
+
+  SELECT a~lifnr a~name1 a~ktokk a~fityp b~ekgrp a~stceg a~actss a~zzjyfs b~minbw b~plifz
+         b~kalsk a~stras a~telf1 a~telf2 a~telfx b~zterm "a~adrnr
+    INTO TABLE lt_lfa1
+    FROM lfa1 AS a
+    INNER JOIN lfm1 AS b ON a~lifnr = b~lifnr
+    WHERE a~lifnr IN s_lifnr
+      AND a~ktokk IN s_ktokk
+      AND b~ekorg EQ 'P001'.
+  IF sy-subrc = 0.
+    SELECT lifnr bankl bankn koinh
+      INTO TABLE lt_lfbk
+      FROM lfbk
+      FOR ALL ENTRIES IN lt_lfa1
+      WHERE lifnr = lt_lfa1-lifnr
+        AND banks = 'CN'.
+    IF sy-subrc = 0.
+      SELECT banks bankl banka brnch stras
+        INTO TABLE lt_bnka
+        FROM bnka
+        FOR ALL ENTRIES IN lt_lfbk
+        WHERE banks = 'CN'
+          AND bankl = lt_lfbk-bankl.
+    ENDIF.
+
+    SELECT parnr name1 telf1 lifnr
+      FROM knvk
+      INTO TABLE lt_knvk
+      FOR ALL ENTRIES IN lt_lfa1
+      WHERE lifnr = lt_lfa1-lifnr.
+
+    SORT lt_knvk BY lifnr parnr.
+    DELETE ADJACENT DUPLICATES FROM lt_knvk COMPARING lifnr.
+
+    IF p_udate IS NOT INITIAL.
+      l_udate = p_udate - 1.
+
+      LOOP AT lt_lfa1 ASSIGNING FIELD-SYMBOL(<fs_lfa1>).
+        <fs_lfa1>-lfa1_key = <fs_lfa1>-lifnr.
+*        CONCATENATE 'BP' <fs_lfa1>-adrnr INTO <fs_lfa1>-adrc_key RESPECTING BLANKS.
+      ENDLOOP.
+      LOOP AT lt_bnka ASSIGNING FIELD-SYMBOL(<fs_bnka>).
+        CONCATENATE sy-mandt <fs_bnka>-banks <fs_bnka>-bankl INTO <fs_bnka>-bnka_key RESPECTING BLANKS.
+      ENDLOOP.
+
+      IF lt_lfa1[] IS NOT INITIAL.
+        SELECT objectclas objectid changenr
+          INTO TABLE lt_cdhdr
+          FROM cdhdr
+          FOR ALL ENTRIES IN lt_lfa1
+          WHERE objectid = lt_lfa1-lfa1_key
+            AND objectclas = 'KRED'
+            AND ( ( udate = l_udate AND utime >= '223000' ) OR ( udate = p_udate AND utime <= '223000' ) ).
+      ENDIF.
+
+      IF lt_bnka[] IS NOT INITIAL.
+        SELECT objectclas objectid changenr
+          APPENDING TABLE lt_cdhdr
+          FROM cdhdr
+          FOR ALL ENTRIES IN lt_bnka
+          WHERE objectid = lt_bnka-bnka_key
+            AND objectclas = 'BANK'
+            AND ( ( udate = l_udate AND utime >= '223000' ) OR ( udate = p_udate AND utime <= '223000' ) ).
+      ENDIF.
+
+      SORT: lt_cdhdr BY objectclas objectid.
+      LOOP AT lt_lfa1 ASSIGNING <fs_lfa1>.
+        READ TABLE lt_cdhdr TRANSPORTING NO FIELDS WITH KEY objectclas = 'KRED' objectid = <fs_lfa1>-lfa1_key BINARY SEARCH.
+        IF sy-subrc <> 0.
+          <fs_lfa1>-nochange = 'X'.
+        ENDIF.
+      ENDLOOP.
+
+      LOOP AT lt_bnka ASSIGNING <fs_bnka>.
+        READ TABLE lt_cdhdr TRANSPORTING NO FIELDS WITH KEY objectclas = 'BANK' objectid = <fs_bnka>-bnka_key BINARY SEARCH.
+        IF sy-subrc <> 0.
+          <fs_bnka>-nochange = 'X'.
+        ENDIF.
+      ENDLOOP.
+
+      CLEAR: lt_cdhdr.
+    ENDIF.
+
+    SORT: lt_lfa1 BY lifnr,
+          lt_lfbk BY lifnr bankl,
+          lt_knvk BY lifnr parnr,
+          lt_bnka BY banks bankl.
+
+    LOOP AT lt_lfa1 INTO DATA(lw_lfa1).
+
+      READ TABLE lt_knvk INTO DATA(lw_knvk) WITH KEY lifnr = lw_lfa1-lifnr BINARY SEARCH.
+      READ TABLE lt_lfbk INTO DATA(lw_lfbk) WITH KEY lifnr = lw_lfa1-lifnr BINARY SEARCH.
+      READ TABLE lt_bnka INTO DATA(lw_bnka) WITH KEY banks = 'CN' bankl = lw_lfbk-bankl BINARY SEARCH.
+
+      MOVE-CORRESPONDING lw_lfa1 TO lw_out.
+      lw_out-telf1 = lw_knvk-telf1.
+      lw_out-lname = lw_knvk-name1.
+      lw_out-bankl = lw_lfbk-bankl.
+      lw_out-bankn = lw_lfbk-bankn.
+      lw_out-koinh = lw_lfbk-koinh.
+      lw_out-banka = lw_bnka-banka.
+      lw_out-brnch = lw_bnka-stras && lw_bnka-brnch.
+
+      " 仅当BNKA和LFA1有修改时才下发
+      IF lw_bnka-nochange IS INITIAL OR lw_lfa1-nochange IS INITIAL.
+        APPEND lw_out TO gt_out.
+      ENDIF.
+
+      CLEAR: lw_lfa1,lw_knvk,lw_out,lw_lfbk,lw_bnka.
+    ENDLOOP.
+
+    IF p_front IS NOT INITIAL.
+      PERFORM frm_display.
+    ELSE.
+      PERFORM frm_transport .
+    ENDIF.
+  ELSE.
+    MESSAGE '没有符合条件的数据' TYPE 'S' DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_MAIN
+*&---------------------------------------------------------------------*
+*&      Form  FRM_DISPLAY
+*&---------------------------------------------------------------------*
+FORM frm_display .
+  DATA: lw_fieldcat   TYPE lvc_s_fcat,
+        lt_fieldcat   TYPE lvc_t_fcat,
+        ls_layout_lvc TYPE lvc_s_layo.
+
+  DEFINE add_field.
+    lw_fieldcat-fieldname = &1.
+    lw_fieldcat-scrtext_s = lw_fieldcat-scrtext_m = lw_fieldcat-reptext = lw_fieldcat-scrtext_l = &2.
+    lw_fieldcat-edit      = &3.
+    lw_fieldcat-no_zero   = &4.
+    lw_fieldcat-outputlen = &5.
+    IF &6 IS NOT INITIAL.
+      lw_fieldcat-ref_table = &6.
+      IF &7 IS INITIAL.
+        lw_fieldcat-ref_field = &1.
+      ELSE.
+        lw_fieldcat-ref_field = &7.
+      ENDIF.
+    ENDIF.
+    APPEND lw_fieldcat TO lt_fieldcat.
+    CLEAR: lw_fieldcat.
+  END-OF-DEFINITION.
+
+  add_field: 'LIFNR'        '供商编码'           '' ''   '10' 'LFA1' '' ,
+             'NAME1'        '供商名称'           '' ''   '35' 'LFA1' '' ,
+             'KTOKK'        '供商类型'           '' ''   '04' 'LFA1' '' ,
+             'FITYP'        '税类型'             '' ''   '02' 'LFA1' '' ,
+             'STCEG'        '纳税识别号'         '' ''   '20' 'LFA1' '' ,
+             'ACTSS'        '供应商状态'         '' ''   '03' 'LFA1' '' ,
+             'ZZJYFS'       '经营方式'           '' ''   '01' 'LFA1' '' ,
+             'STRAS'        '供应商地址'         '' ''   '35' 'LFA1' '' ,
+             'STELF1'       '供应商办公电话'     '' ''   '16' 'LFA1' '' ,
+             'STELF2'       '供应商手机'         '' ''   '16' 'LFA1' '' ,
+             'STELFX'       '供应商传真'         '' ''   '31' 'LFA1' '' ,
+             'EKGRP'        '经营范围'           '' ''   '03' 'LFM1' '' ,
+             'MINBW'        '最小起订金额'       '' ''   '20' 'LFM1' '' ,
+             'PLIFZ'        '默认订货日期'       '' ''   '03' 'LFM1' '' ,
+             'KALSK'        '允许手工改价'       '' ''   '04' 'LFM1' '' ,
+             'ZTERM'        '付款条件'           '' ''   '04' 'LFM1' '' ,
+             'LNAME'        '联系人'             '' ''   '35' 'LFA1' '' ,
+             'TELF1'        '联系人电话'         '' ''   '16' 'LFA1' '' ,
+             'BANKL'        '银行代码'           '' ''   '15' 'LFBK' '' ,
+             'BANKN'        '银行账号'           '' ''   '18' 'LFBK' '' ,
+             'KOINH'        '持有者'             '' ''   '60' 'LFBK' '' ,
+             'BANKA'        '银行名称'           '' ''   '60' 'BNKA' '' ,
+             'BRNCH'        '分行名称'           '' ''   '100' '' '' .
+
+  ls_layout_lvc-zebra        = 'X' .
+  ls_layout_lvc-cwidth_opt   = 'X' .    "列宽度自动根据内容优化
+  ls_layout_lvc-sel_mode = 'D'.
+  ls_layout_lvc-no_toolbar = 'X'.
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY_LVC'
+    EXPORTING
+      i_callback_program       = sy-repid
+      i_callback_pf_status_set = 'FRM_PF_STATUS'
+      i_callback_user_command  = 'FRM_USER_COMMAND'
+      is_layout_lvc            = ls_layout_lvc
+      it_fieldcat_lvc          = lt_fieldcat
+    TABLES
+      t_outtab                 = gt_out
+    EXCEPTIONS
+      program_error            = 1
+      OTHERS                   = 2.
+  IF sy-subrc <> 0.
+    MESSAGE ID sy-msgid TYPE 'S' NUMBER sy-msgno
+          WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+FORM frm_pf_status USING  extab TYPE slis_t_extab.
+  clear: extab,extab[].
+  SET PF-STATUS '1000' EXCLUDING extab.
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_USER_COMMAND
+*&---------------------------------------------------------------------*
+FORM frm_user_command USING ucomm LIKE sy-ucomm
+                            selfield TYPE slis_selfield.
+
+  IF ucomm = 'SEND'.
+    PERFORM frm_transport .
+  ENDIF.
+
+  selfield-refresh = 'X'.
+  selfield-col_stable = 'X'.
+  selfield-row_stable = 'X'.
+ENDFORM.              " FRM_DISPLAY              " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+FORM frm_transport .
+  DATA: lo_proxy        TYPE REF TO zco_si_supply_mastdata_out_asy,
+        lo_system_fault TYPE REF TO cx_ai_system_fault,
+        ls_output       TYPE zmt_supply_mastdata,
+        lw_header       TYPE zdt_supply_mastdata_header.
+  DATA: lv_message TYPE string,
+        l_count    TYPE i,
+        l_packno   TYPE i,
+        s_line     TYPE i,
+        e_line     TYPE i,
+        l_ddate    TYPE char14.
+  DATA:lt_out  TYPE TABLE OF ty_out,
+       lt_roid TYPE lvc_t_roid,
+       lw_roid TYPE lvc_s_roid,
+       lr_alv  TYPE REF TO cl_gui_alv_grid.
+
+  CLEAR: lt_out.
+
+  IF p_front EQ 'X'.
+    CALL FUNCTION 'GET_GLOBALS_FROM_SLVC_FULLSCR'
+      IMPORTING
+        e_grid = lr_alv.
+    IF lr_alv IS BOUND.
+      CALL METHOD lr_alv->check_changed_data.
+
+      lr_alv->get_selected_rows( IMPORTING et_row_no = lt_roid ).
+    ENDIF.
+    LOOP AT lt_roid INTO lw_roid.
+      READ TABLE gt_out INTO DATA(lw_out) INDEX lw_roid-row_id.
+      IF sy-subrc = 0.
+        APPEND lw_out TO lt_out.
+      ENDIF.
+      CLEAR: lw_roid.
+    ENDLOOP.
+    CLEAR: lt_roid.
+  ELSE.
+    lt_out[] = gt_out[].
+  ENDIF.
+
+  CLEAR :s_line ,e_line ,l_packno.
+  IF lt_out[] IS  NOT INITIAL.
+    l_ddate = sy-datum && sy-uzeit.
+
+    LOOP AT lt_out INTO lw_out.
+      ADD 1 TO l_count.
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
+        EXPORTING
+          input  = lw_out-lifnr
+        IMPORTING
+          output = lw_out-lifnr.
+      MOVE-CORRESPONDING lw_out TO lw_header.
+      lw_header-zbhts = '3'.
+      lw_header-zzdqr = ''.
+      lw_header-dstus = '0'.
+      lw_header-ddate = l_ddate.
+      APPEND lw_header TO ls_output-mt_supply_mastdata-header.
+
+      IF l_count EQ p_size.
+        ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+        ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+        TRY.
+            CREATE OBJECT lo_proxy.
+            CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+              EXPORTING
+                output = ls_output.
+            s_line = s_line + l_count.
+
+            COMMIT WORK AND WAIT.
+          CATCH cx_ai_system_fault INTO lo_system_fault.
+            CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+          CATCH cx_root.
+            lv_message = '未知原因的下发失败'.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+        ENDTRY.
+
+        ADD 1 TO l_packno.
+        l_count = 0.
+        CLEAR: ls_output.
+        CLEAR:lv_message.
+      ENDIF.
+      CLEAR: lw_header.
+    ENDLOOP.
+
+    IF l_count > 0.
+      ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+      ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+      TRY.
+          CREATE OBJECT lo_proxy.
+          CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+            EXPORTING
+              output = ls_output.
+          s_line = s_line + l_count.
+
+          COMMIT WORK AND WAIT.
+        CATCH cx_ai_system_fault INTO lo_system_fault.
+
+          CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+        CATCH cx_root.
+
+          lv_message = '未知原因的下发失败'.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+      ENDTRY.
+
+      ADD 1 TO l_packno.
+      l_count = 0.
+      CLEAR: ls_output.
+      CLEAR:lv_message.
+    ENDIF.
+
+    MESSAGE s888(sabapdocu) WITH '发送了' && l_packno && '个数据包,' && '发送成功了' && s_line && '条，' && '失败了' && e_line && '条'.
+    CLEAR: l_count,l_packno.
+
+  ELSE.
+    MESSAGE s888(sabapdocu) WITH '没有可发送数据'.
+  ENDIF.
+ENDFORM.                    " FRM_TRANSPORT
+
+
+```
+
+
+
+
+
+ZDMALL003
+
+```tex
+
+*&---------------------------------------------------------------------*
+*& Report  ZDMALL003
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zdmall003.
+
+TABLES:lfa1.
+
+TYPES: BEGIN OF ty_out,
+         lifnr  TYPE lfa1-lifnr, "供应商
+         name1  TYPE lfa1-name1, "名称
+         ktokk  TYPE lfa1-ktokk, "供商类型
+         fityp  TYPE lfa1-fityp, "税类型
+         ekgrp  TYPE lfm1-ekgrp,  "经营范围
+         stceg  TYPE lfa1-stceg, "税号
+         actss  TYPE lfa1-actss, "状态
+         zzjyfs TYPE lfa1-zzjyfs,
+         lname  TYPE knvk-name1, "联系人
+         telf1  TYPE knvk-telf1, "联系人电话
+*         zbhts      TYPE lfm1-plifz,
+         minbw  TYPE lfm1-minbw,
+         plifz  TYPE lfm1-plifz,
+         kalsk  TYPE lfm1-kalsk,
+         zzdqr  TYPE char1,
+
+         sel    TYPE char1,
+       END OF ty_out.
+
+DATA:gt_out TYPE TABLE OF ty_out.
+
+*----------------------------------------------------------------------*
+* Selection Screen
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE text-b01.
+PARAMETERS: p_front RADIOBUTTON GROUP rg1 DEFAULT 'X' USER-COMMAND uc01,
+            p_back  RADIOBUTTON GROUP rg1.
+SELECTION-SCREEN END OF BLOCK b1.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-b02.
+SELECT-OPTIONS : s_lifnr FOR lfa1-lifnr.
+SELECT-OPTIONS : s_erdat FOR lfa1-erdat NO-EXTENSION.
+SELECT-OPTIONS : s_ktokk FOR lfa1-ktokk DEFAULT 'Z002'.
+SELECTION-SCREEN END OF BLOCK b2.
+
+SELECTION-SCREEN BEGIN OF BLOCK b3 WITH FRAME TITLE text-b03.
+PARAMETERS: p_size TYPE int4 OBLIGATORY DEFAULT 10000.
+PARAMETERS: p_all AS CHECKBOX DEFAULT space.
+SELECTION-SCREEN END OF BLOCK b3.
+
+
+DATA: gs_fieldcat   TYPE lvc_s_fcat,
+      gt_fieldcat   TYPE lvc_t_fcat,
+      gs_layout_lvc TYPE lvc_s_layo.
+
+START-OF-SELECTION.
+  PERFORM frm_main.
+
+  IF p_front IS NOT INITIAL.
+    PERFORM frm_display.
+  ELSE.
+    PERFORM frm_transport .
+  ENDIF.
+
+
+
+END-OF-SELECTION.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_MAIN
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM frm_main .
+  TYPES : BEGIN OF ty_bdcp2,
+            tabkey TYPE bdcp2-tabkey,
+            lifnr  TYPE lfa1-lifnr,
+          END OF ty_bdcp2.
+
+
+  TYPES : BEGIN OF ty_knvk,
+            parnr  TYPE knvk-parnr,
+            cname1 TYPE knvk-name1,
+            telf1  TYPE knvk-telf1,
+            lifnr  TYPE knvk-lifnr,
+          END OF ty_knvk.
+
+
+
+
+
+  DATA :lt_bdcp2 TYPE TABLE OF ty_bdcp2,
+        ls_bdcp2 TYPE ty_bdcp2,
+        lt_knvk  TYPE TABLE OF ty_knvk,
+        ls_knvk  TYPE ty_knvk.
+
+  DATA :s_low  TYPE string,
+        s_high TYPE string.
+
+  IF p_all EQ 'X'."全量下发
+
+    SELECT a~lifnr
+         a~name1
+         a~ktokk
+         a~fityp
+         a~stceg
+         a~actss
+         a~zzjyfs
+         b~minbw
+         b~kalsk
+         b~ekgrp
+         b~plifz INTO CORRESPONDING FIELDS OF TABLE gt_out
+      FROM lfa1 AS a JOIN lfm1 AS b
+      ON a~lifnr EQ b~lifnr
+     WHERE a~erdat IN s_erdat
+      AND a~lifnr IN s_lifnr
+      AND a~ktokk IN s_ktokk
+      AND b~ekorg EQ 'P001'.
+
+  ELSE.
+
+    IF s_erdat-high IS NOT INITIAL.
+      s_low = s_erdat-low && '000000'.
+      s_high = s_erdat-high && '235959'.
+      SELECT tabkey
+        INTO CORRESPONDING FIELDS OF TABLE lt_bdcp2
+        FROM bdcp2
+        WHERE mestype = 'CREMAS'
+        AND tabname IN ('LFA1','LFBK')
+        AND cretime >= s_low
+        AND cretime <= s_high.
+
+    ELSEIF s_erdat-low IS NOT INITIAL.
+      s_low = s_erdat-low && '000000'.
+      s_high = s_erdat-low && '235959'.
+      SELECT tabkey
+        INTO CORRESPONDING FIELDS OF TABLE lt_bdcp2
+        FROM bdcp2
+        WHERE mestype = 'CREMAS'
+        AND tabname IN ('LFA1','LFBK')
+        AND cretime >= s_low
+        AND cretime <=  s_high.
+
+    ELSE.
+      SELECT tabkey
+         INTO CORRESPONDING FIELDS OF TABLE lt_bdcp2
+         FROM bdcp2
+         WHERE mestype = 'CREMAS'
+         AND tabname IN ('LFA1','LFBK').
+    ENDIF.
+
+  ENDIF.
+
+  SORT lt_bdcp2 BY tabkey.
+  DELETE ADJACENT DUPLICATES FROM lt_bdcp2 COMPARING tabkey.
+
+  LOOP AT lt_bdcp2 INTO ls_bdcp2.
+
+    ls_bdcp2-lifnr = ls_bdcp2-tabkey+3(10).
+
+    CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+      EXPORTING
+        input  = ls_bdcp2-lifnr
+      IMPORTING
+        output = ls_bdcp2-lifnr.
+
+    MODIFY lt_bdcp2 FROM ls_bdcp2 TRANSPORTING lifnr.
+  ENDLOOP.
+  SORT lt_bdcp2 BY lifnr.
+  DELETE ADJACENT DUPLICATES FROM lt_bdcp2 COMPARING lifnr.
+
+  IF lt_bdcp2 IS NOT INITIAL.
+
+    SELECT a~lifnr
+         a~name1
+         a~ktokk
+         a~fityp
+         a~stceg
+         a~actss
+         a~zzjyfs
+         b~minbw
+         b~kalsk
+         b~ekgrp
+         b~plifz INTO CORRESPONDING FIELDS OF TABLE gt_out
+      FROM lfa1 AS a JOIN lfm1 AS b
+      ON a~lifnr EQ b~lifnr
+      FOR ALL ENTRIES IN lt_bdcp2
+      WHERE a~lifnr = lt_bdcp2-lifnr
+      AND a~lifnr IN s_lifnr
+      AND a~ktokk IN s_ktokk
+      AND b~ekorg EQ 'P001'.
+
+  ENDIF.
+  IF gt_out IS NOT INITIAL.
+*-----取最大的一条
+    SELECT  a~parnr
+            a~name1 AS cname1
+            a~telf1
+            a~lifnr
+      FROM knvk AS a
+      INTO CORRESPONDING FIELDS OF TABLE lt_knvk
+      FOR ALL ENTRIES IN gt_out
+      WHERE a~lifnr = gt_out-lifnr.
+
+    SORT lt_knvk BY lifnr  parnr DESCENDING.
+  ELSE.
+    MESSAGE s888(sabapdocu) WITH '没有符合条件的数据' DISPLAY LIKE 'E'.
+    LEAVE LIST-PROCESSING.
+  ENDIF.
+  LOOP AT gt_out ASSIGNING FIELD-SYMBOL(<lf_out>).
+    READ TABLE lt_knvk INTO ls_knvk WITH  KEY lifnr = <lf_out>-lifnr BINARY SEARCH.
+    IF sy-subrc EQ 0.
+      <lf_out>-lname = ls_knvk-cname1.
+      <lf_out>-telf1 = ls_knvk-telf1.
+
+    ENDIF.
+
+  ENDLOOP.
+
+
+ENDFORM.                    " FRM_MAIN
+*&---------------------------------------------------------------------*
+*&      Form  FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM frm_display .
+  CLEAR: gt_fieldcat.
+
+*----------------------------------------------------------------------*&
+  DEFINE add_field.
+    gs_fieldcat-fieldname = &1.
+    gs_fieldcat-scrtext_m = &2.
+    gs_fieldcat-edit      = &3.
+    gs_fieldcat-no_zero   = &4.
+    gs_fieldcat-outputlen = &5.
+    gs_fieldcat-key       = &6.
+    gs_fieldcat-checkbox  = &7.
+
+    APPEND gs_fieldcat TO gt_fieldcat.
+  END-OF-DEFINITION.
+*----------------------------------------------------------------------*&
+  add_field:
+  'LIFNR'        '供商编码'           '' ''   '10' '' '' ,
+  'NAME1'        '供商名称'           '' ''   '4' '' '' ,
+  'KTOKK'        '供商类型'           '' ''   '10' '' '' ,
+  'FITYP'        '税类型'             '' ''   '18' '' '' ,
+  'EKGRP'        '经营范围'           '' ''   '8' '' '' ,
+  'ACTSS'        '状态'               '' ''   '3' '' '' ,
+  'LNAME'        '联系人'             '' ''   '4' '' '' ,
+  'TELF1'        '联系电话'             '' ''   '4' '' '' ,
+  'MINBW'        '最小起订金额'             '' ''   '4' '' '' ,
+  'PLIFZ'        '默认订货日期'             '' ''   '4' '' '' ,
+  'KALSK'        '允许手工改价'             '' ''   '4' '' '' .
+
+
+*----------------------------------------------------------------------*&
+  gs_layout_lvc-zebra        = 'X' .
+*  gs_layout_lvc-cwidth_opt   = 'X' .    "列宽度自动根据内容优化
+  gs_layout_lvc-detailinit   = 'X' .
+  gs_layout_lvc-box_fname    = 'SEL'.
+*  l_grid_settings-edt_cll_cb = 'X' .
+
+*---修改数据----------
+
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY_LVC'
+    EXPORTING
+      i_callback_program       = sy-repid
+*     i_callback_top_of_page   = 'FRM_TOP_PAGE'
+      i_callback_pf_status_set = 'FRM_PF_STATUS'
+      i_callback_user_command  = 'FRM_USER_COMMAND'
+*     it_events                = gt_events
+      is_layout_lvc            = gs_layout_lvc
+      it_fieldcat_lvc          = gt_fieldcat
+*     i_grid_settings          = l_grid_settings
+    TABLES
+      t_outtab                 = gt_out
+    EXCEPTIONS
+      program_error            = 1
+      OTHERS                   = 2.
+  IF sy-subrc <> 0.
+    MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+            WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+  ENDIF.
+ENDFORM.                    " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+
+FORM frm_pf_status USING  extab TYPE slis_t_extab.
+
+  SET PF-STATUS '1000' .
+
+
+ENDFORM.
+
+
+FORM frm_user_command USING ucomm LIKE sy-ucomm
+                        selfield TYPE slis_selfield.
+
+  DATA ref1 TYPE REF TO cl_gui_alv_grid.
+
+**---Reflash----
+  CALL FUNCTION 'GET_GLOBALS_FROM_SLVC_FULLSCR'
+    IMPORTING
+      e_grid = ref1.
+  CALL METHOD ref1->check_changed_data.
+  IF ucomm = 'SEND'.
+    PERFORM frm_transport .
+  ENDIF.
+
+  selfield-refresh = 'X'.
+  selfield-col_stable = 'X'.
+  selfield-row_stable = 'X'.
+ENDFORM.              " FRM_DISPLAY              " FRM_DISPLAY
+
+
+
+
+FORM frm_transport .
+  DATA: lo_proxy        TYPE REF TO zco_si_supply_mastdata_out_asy,
+        lo_system_fault TYPE REF TO cx_ai_system_fault,
+        ls_output       TYPE zmt_supply_mastdata,
+        lw_header       TYPE zdt_supply_mastdata_header.
+  DATA: lv_message TYPE string.
+  DATA: l_count  TYPE i,
+        l_packno TYPE i,
+        s_line   TYPE i,
+        e_line   TYPE i,
+        l_date   TYPE sy-datum,
+        l_time   TYPE sy-uzeit.
+
+  DATA:lt_out TYPE TABLE OF ty_out.
+
+*  DATA:lt_send_alv TYPE TABLE OF ty_alv,
+*        ls_send_alv TYPE ty_alv.
+  CLEAR:lt_out.
+  IF p_front EQ 'X'.
+    lt_out = gt_out.
+    DELETE lt_out WHERE sel <> 'X'  .
+  ELSE.
+    lt_out = gt_out.
+
+  ENDIF.
+
+  CLEAR :s_line ,e_line ,l_packno.
+  IF lt_out IS  NOT INITIAL.
+    l_date = sy-datum.
+    l_time = sy-uzeit.
+
+    LOOP AT lt_out INTO DATA(lw_out).
+      ADD 1 TO l_count.
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
+        EXPORTING
+          input  = lw_out-lifnr
+        IMPORTING
+          output = lw_out-lifnr.
+      MOVE-CORRESPONDING lw_out TO lw_header.
+      lw_header-zbhts = '3'.
+      lw_header-zzdqr = ''.
+      lw_header-dstus = '0'.
+      lw_header-ddate = sy-datum && sy-uzeit.
+      APPEND lw_header TO ls_output-mt_supply_mastdata-header.
+*      lw_alv-packno = l_packno + 1.
+*      IF p_qt EQ 'X'.
+*        MODIFY gt_alv FROM lw_alv TRANSPORTING packno WHERE kokrs = lw_alv-kokrs AND prctr = lw_alv-prctr AND bukrs = lw_alv-bukrs.
+*
+*      ENDIF.
+
+
+
+      IF l_count EQ p_size.
+        CONCATENATE sy-host  '_'  sy-uname  sy-datum '_' sy-uzeit  INTO ls_output-mt_supply_mastdata-message_header-filename.
+        CONCATENATE sy-datum  sy-uzeit INTO ls_output-mt_supply_mastdata-message_header-send_date.
+        ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+        ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+        TRY.
+            CREATE OBJECT lo_proxy.
+            CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+              EXPORTING
+                output = ls_output.
+            s_line = s_line + l_count.
+
+            COMMIT WORK AND WAIT.
+          CATCH cx_ai_system_fault INTO lo_system_fault.
+            CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+          CATCH cx_root.
+            lv_message = '未知原因的下发失败'.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+        ENDTRY.
+
+        ADD 1 TO l_packno.
+        l_count = 0.
+        CLEAR: ls_output.
+        CLEAR:lv_message.
+      ENDIF.
+      CLEAR: lw_header.
+    ENDLOOP.
+
+
+    IF l_count > 0.
+      CONCATENATE sy-host  '_'  sy-uname  sy-datum '_' sy-uzeit  INTO ls_output-mt_supply_mastdata-message_header-filename.
+      CONCATENATE sy-datum  sy-uzeit INTO ls_output-mt_supply_mastdata-message_header-send_date.
+
+      ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+      TRY.
+          CREATE OBJECT lo_proxy.
+          CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+            EXPORTING
+              output = ls_output.
+          s_line = s_line + l_count.
+
+          COMMIT WORK AND WAIT.
+        CATCH cx_ai_system_fault INTO lo_system_fault.
+
+          CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+        CATCH cx_root.
+
+          lv_message = '未知原因的下发失败'.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+      ENDTRY.
+
+      ADD 1 TO l_packno.
+      l_count = 0.
+      CLEAR: ls_output.
+      CLEAR:lv_message.
+    ENDIF.
+
+    IF p_front = 'X'.
+      MESSAGE  s888(sabapdocu) WITH '发送了' && l_packno && '个数据包,' && '发送成功了' && s_line && '条，'&& '失败了' && e_line && '条'.
+    ELSE.
+      MESSAGE  s888(sabapdocu) WITH '发送了' && l_packno && '个数据包,' && '发送成功了' && s_line && '条'.
+    ENDIF.
+    CLEAR: l_count,l_packno.
+
+  ELSE.
+    MESSAGE s888(sabapdocu) WITH '没有可发送数据'.
+  ENDIF.
+
+
+ENDFORM.                    " FRM_TRANSPORT
+```
+
+
+
+
+
+```XML
+
+
+TYPES: BEGIN OF ty_out,
+         lifnr  TYPE lfa1-lifnr, "供应商
+         name1  TYPE lfa1-name1, "名称
+         ktokk  TYPE lfa1-ktokk, "供商类型
+         fityp  TYPE lfa1-fityp, "税类型
+         stceg  TYPE lfa1-stceg, "税号
+         actss  TYPE lfa1-actss, "状态
+         zzjyfs TYPE lfa1-zzjyfs,
+         stras  TYPE lfa1-stras,
+         stelf1 TYPE lfa1-telf1,
+         stelf2 TYPE lfa1-telf2,
+         stelfx TYPE lfa1-telfx,
+         ekgrp  TYPE lfm1-ekgrp,  "经营范围
+         minbw  TYPE lfm1-minbw,
+         plifz  TYPE lfm1-plifz,
+         kalsk  TYPE lfm1-kalsk,
+         zterm  TYPE lfm1-zterm,
+         lname  TYPE knvk-name1, "联系人
+         telf1  TYPE knvk-telf1, "联系人电话
+         bankl  TYPE lfbk-bankl,
+         bankn  TYPE lfbk-bankn,
+         koinh  TYPE lfbk-koinh,
+         banka  TYPE bnka-banka,
+         brnch  TYPE char100,    " BNKA-STRAS && BNKA-BRNCH
+       END OF ty_out,
+       BEGIN OF ty_lfa1,
+         lifnr       TYPE lfa1-lifnr, "供应商
+         name1       TYPE lfa1-name1, "名称
+         ktokk       TYPE lfa1-ktokk, "供商类型
+         fityp       TYPE lfa1-fityp, "税类型
+         ekgrp       TYPE lfm1-ekgrp,  "经营范围
+         stceg       TYPE lfa1-stceg, "税号
+         actss       TYPE lfa1-actss, "状态
+         zzjyfs      TYPE lfa1-zzjyfs,
+         minbw       TYPE lfm1-minbw,
+         plifz       TYPE lfm1-plifz,
+         kalsk       TYPE lfm1-kalsk,
+         stras       TYPE lfa1-stras,
+         stelf1      TYPE lfa1-telf1,
+         stelf2      TYPE lfa1-telf2,
+         stelfx      TYPE lfa1-telfx,
+         zterm       TYPE lfm1-zterm,
+*         adrnr    TYPE lfa1-adrnr,
+         lfa1_key    TYPE cdhdr-objectid,
+*         adrc_key TYPE cdhdr-objectid,
+         nochange(1) TYPE c,
+       END OF ty_lfa1,
+       BEGIN OF ty_lfbk,
+         lifnr TYPE lfbk-lifnr,
+         bankl TYPE lfbk-bankl,
+         bankn TYPE lfbk-bankn,
+         koinh TYPE lfbk-koinh,
+*         lfbk_key TYPE cdhdr-objectid,
+       END OF ty_lfbk,
+       BEGIN OF ty_bnka,
+         banks       TYPE bnka-banks,
+         bankl       TYPE bnka-bankl,
+         banka       TYPE bnka-banka,
+         brnch       TYPE bnka-brnch,
+         stras       TYPE bnka-stras,
+         bnka_key    TYPE cdhdr-objectid,
+         nochange(1) TYPE c,
+       END OF ty_bnka,
+
+DATA:gt_out TYPE TABLE OF ty_out.
+
+
+
+*&---------------------------------------------------------------------*
+*&      Form  FRM_MAIN
+*&---------------------------------------------------------------------*
+FORM frm_main .
+  DATA: lt_lfa1  TYPE STANDARD TABLE OF ty_lfa1,
+        lt_lfbk  TYPE STANDARD TABLE OF ty_lfbk,
+        lt_knvk  TYPE STANDARD TABLE OF ty_knvk,
+        lt_bnka  TYPE STANDARD TABLE OF ty_bnka,
+        lt_cdhdr TYPE STANDARD TABLE OF ty_cdhdr,
+        lw_out   TYPE ty_out.
+  DATA: l_udate TYPE sy-datum.
+
+  SELECT a~lifnr a~name1 a~ktokk a~fityp b~ekgrp a~stceg a~actss a~zzjyfs b~minbw b~plifz
+         b~kalsk a~stras a~telf1 a~telf2 a~telfx b~zterm "a~adrnr
+    INTO TABLE lt_lfa1
+    FROM lfa1 AS a
+    INNER JOIN lfm1 AS b ON a~lifnr = b~lifnr
+    WHERE a~lifnr IN s_lifnr
+      AND a~ktokk IN s_ktokk
+      AND b~ekorg EQ 'P001'.
+  IF sy-subrc = 0.
+    SELECT lifnr bankl bankn koinh
+      INTO TABLE lt_lfbk
+      FROM lfbk
+      FOR ALL ENTRIES IN lt_lfa1
+      WHERE lifnr = lt_lfa1-lifnr
+        AND banks = 'CN'.
+    IF sy-subrc = 0.
+      SELECT banks bankl banka brnch stras
+        INTO TABLE lt_bnka
+        FROM bnka
+        FOR ALL ENTRIES IN lt_lfbk
+        WHERE banks = 'CN'
+          AND bankl = lt_lfbk-bankl.
+    ENDIF.
+
+    SELECT parnr name1 telf1 lifnr
+      FROM knvk
+      INTO TABLE lt_knvk
+      FOR ALL ENTRIES IN lt_lfa1
+      WHERE lifnr = lt_lfa1-lifnr.
+
+    SORT lt_knvk BY lifnr parnr.
+    DELETE ADJACENT DUPLICATES FROM lt_knvk COMPARING lifnr.
+
+    IF p_udate IS NOT INITIAL.
+      l_udate = p_udate - 1.
+
+      LOOP AT lt_lfa1 ASSIGNING FIELD-SYMBOL(<fs_lfa1>).
+        <fs_lfa1>-lfa1_key = <fs_lfa1>-lifnr.
+*        CONCATENATE 'BP' <fs_lfa1>-adrnr INTO <fs_lfa1>-adrc_key RESPECTING BLANKS.
+      ENDLOOP.
+      LOOP AT lt_bnka ASSIGNING FIELD-SYMBOL(<fs_bnka>).
+        CONCATENATE sy-mandt <fs_bnka>-banks <fs_bnka>-bankl INTO <fs_bnka>-bnka_key RESPECTING BLANKS.
+      ENDLOOP.
+
+      IF lt_lfa1[] IS NOT INITIAL.
+        SELECT objectclas objectid changenr
+          INTO TABLE lt_cdhdr
+          FROM cdhdr
+          FOR ALL ENTRIES IN lt_lfa1
+          WHERE objectid = lt_lfa1-lfa1_key
+            AND objectclas = 'KRED'
+            AND ( ( udate = l_udate AND utime >= '223000' ) OR ( udate = p_udate AND utime <= '223000' ) ).
+      ENDIF.
+
+      IF lt_bnka[] IS NOT INITIAL.
+        SELECT objectclas objectid changenr
+          APPENDING TABLE lt_cdhdr
+          FROM cdhdr
+          FOR ALL ENTRIES IN lt_bnka
+          WHERE objectid = lt_bnka-bnka_key
+            AND objectclas = 'BANK'
+            AND ( ( udate = l_udate AND utime >= '223000' ) OR ( udate = p_udate AND utime <= '223000' ) ).
+      ENDIF.
+
+      SORT: lt_cdhdr BY objectclas objectid.
+      LOOP AT lt_lfa1 ASSIGNING <fs_lfa1>.
+        READ TABLE lt_cdhdr TRANSPORTING NO FIELDS WITH KEY objectclas = 'KRED' objectid = <fs_lfa1>-lfa1_key BINARY SEARCH.
+        IF sy-subrc <> 0.
+          <fs_lfa1>-nochange = 'X'.
+        ENDIF.
+      ENDLOOP.
+
+      LOOP AT lt_bnka ASSIGNING <fs_bnka>.
+        READ TABLE lt_cdhdr TRANSPORTING NO FIELDS WITH KEY objectclas = 'BANK' objectid = <fs_bnka>-bnka_key BINARY SEARCH.
+        IF sy-subrc <> 0.
+          <fs_bnka>-nochange = 'X'.
+        ENDIF.
+      ENDLOOP.
+
+      CLEAR: lt_cdhdr.
+    ENDIF.
+
+    SORT: lt_lfa1 BY lifnr,
+          lt_lfbk BY lifnr bankl,
+          lt_knvk BY lifnr parnr,
+          lt_bnka BY banks bankl.
+
+    LOOP AT lt_lfa1 INTO DATA(lw_lfa1).
+
+      READ TABLE lt_knvk INTO DATA(lw_knvk) WITH KEY lifnr = lw_lfa1-lifnr BINARY SEARCH.
+      READ TABLE lt_lfbk INTO DATA(lw_lfbk) WITH KEY lifnr = lw_lfa1-lifnr BINARY SEARCH.
+      READ TABLE lt_bnka INTO DATA(lw_bnka) WITH KEY banks = 'CN' bankl = lw_lfbk-bankl BINARY SEARCH.
+
+      MOVE-CORRESPONDING lw_lfa1 TO lw_out.
+      lw_out-telf1 = lw_knvk-telf1.
+      lw_out-lname = lw_knvk-name1.
+      lw_out-bankl = lw_lfbk-bankl.
+      lw_out-bankn = lw_lfbk-bankn.
+      lw_out-koinh = lw_lfbk-koinh.
+      lw_out-banka = lw_bnka-banka.
+      lw_out-brnch = lw_bnka-stras && lw_bnka-brnch.
+
+      " 仅当BNKA和LFA1有修改时才下发
+      IF lw_bnka-nochange IS INITIAL OR lw_lfa1-nochange IS INITIAL.
+        APPEND lw_out TO gt_out.
+      ENDIF.
+
+      CLEAR: lw_lfa1,lw_knvk,lw_out,lw_lfbk,lw_bnka.
+    ENDLOOP.
+
+    IF p_front IS NOT INITIAL.
+      PERFORM frm_display.
+    ELSE.
+      PERFORM frm_transport .
+    ENDIF.
+  ELSE.
+    MESSAGE '没有符合条件的数据' TYPE 'S' DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_MAIN
+*&---------------------------------------------------------------------*
+*&      Form  FRM_DISPLAY
+*&---------------------------------------------------------------------*
+FORM frm_display .
+  DATA: lw_fieldcat   TYPE lvc_s_fcat,
+        lt_fieldcat   TYPE lvc_t_fcat,
+        ls_layout_lvc TYPE lvc_s_layo.
+
+  DEFINE add_field.
+    lw_fieldcat-fieldname = &1.
+    lw_fieldcat-scrtext_s = lw_fieldcat-scrtext_m = lw_fieldcat-reptext = lw_fieldcat-scrtext_l = &2.
+    lw_fieldcat-edit      = &3.
+    lw_fieldcat-no_zero   = &4.
+    lw_fieldcat-outputlen = &5.
+    IF &6 IS NOT INITIAL.
+      lw_fieldcat-ref_table = &6.
+      IF &7 IS INITIAL.
+        lw_fieldcat-ref_field = &1.
+      ELSE.
+        lw_fieldcat-ref_field = &7.
+      ENDIF.
+    ENDIF.
+    APPEND lw_fieldcat TO lt_fieldcat.
+    CLEAR: lw_fieldcat.
+  END-OF-DEFINITION.
+
+  add_field: 'LIFNR'        '供商编码'           '' ''   '10' 'LFA1' '' ,
+             'NAME1'        '供商名称'           '' ''   '35' 'LFA1' '' ,
+             'KTOKK'        '供商类型'           '' ''   '04' 'LFA1' '' ,
+             'FITYP'        '税类型'             '' ''   '02' 'LFA1' '' ,
+             'STCEG'        '纳税识别号'         '' ''   '20' 'LFA1' '' ,
+             'ACTSS'        '供应商状态'         '' ''   '03' 'LFA1' '' ,
+             'ZZJYFS'       '经营方式'           '' ''   '01' 'LFA1' '' ,
+             'STRAS'        '供应商地址'         '' ''   '35' 'LFA1' '' ,
+             'STELF1'       '供应商办公电话'     '' ''   '16' 'LFA1' '' ,
+             'STELF2'       '供应商手机'         '' ''   '16' 'LFA1' '' ,
+             'STELFX'       '供应商传真'         '' ''   '31' 'LFA1' '' ,
+             'EKGRP'        '经营范围'           '' ''   '03' 'LFM1' '' ,
+             'MINBW'        '最小起订金额'       '' ''   '20' 'LFM1' '' ,
+             'PLIFZ'        '默认订货日期'       '' ''   '03' 'LFM1' '' ,
+             'KALSK'        '允许手工改价'       '' ''   '04' 'LFM1' '' ,
+             'ZTERM'        '付款条件'           '' ''   '04' 'LFM1' '' ,
+             'LNAME'        '联系人'             '' ''   '35' 'LFA1' '' ,
+             'TELF1'        '联系人电话'         '' ''   '16' 'LFA1' '' ,
+             'BANKL'        '银行代码'           '' ''   '15' 'LFBK' '' ,
+             'BANKN'        '银行账号'           '' ''   '18' 'LFBK' '' ,
+             'KOINH'        '持有者'             '' ''   '60' 'LFBK' '' ,
+             'BANKA'        '银行名称'           '' ''   '60' 'BNKA' '' ,
+             'BRNCH'        '分行名称'           '' ''   '100' '' '' .
+
+  ls_layout_lvc-zebra        = 'X' .
+  ls_layout_lvc-cwidth_opt   = 'X' .    "列宽度自动根据内容优化
+  ls_layout_lvc-sel_mode = 'D'.
+  ls_layout_lvc-no_toolbar = 'X'.
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY_LVC'
+    EXPORTING
+      i_callback_program       = sy-repid
+      i_callback_pf_status_set = 'FRM_PF_STATUS'
+      i_callback_user_command  = 'FRM_USER_COMMAND'
+      is_layout_lvc            = ls_layout_lvc
+      it_fieldcat_lvc          = lt_fieldcat
+    TABLES
+      t_outtab                 = gt_out
+    EXCEPTIONS
+      program_error            = 1
+      OTHERS                   = 2.
+  IF sy-subrc <> 0.
+    MESSAGE ID sy-msgid TYPE 'S' NUMBER sy-msgno
+          WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+FORM frm_pf_status USING  extab TYPE slis_t_extab.
+  clear: extab,extab[].
+  SET PF-STATUS '1000' EXCLUDING extab.
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_USER_COMMAND
+*&---------------------------------------------------------------------*
+FORM frm_user_command USING ucomm LIKE sy-ucomm
+                            selfield TYPE slis_selfield.
+
+  IF ucomm = 'SEND'.
+    PERFORM frm_transport .
+  ENDIF.
+
+  selfield-refresh = 'X'.
+  selfield-col_stable = 'X'.
+  selfield-row_stable = 'X'.
+ENDFORM.              " FRM_DISPLAY              " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+FORM frm_transport .
+  DATA: lo_proxy        TYPE REF TO zco_si_supply_mastdata_out_asy,
+        lo_system_fault TYPE REF TO cx_ai_system_fault,
+        ls_output       TYPE zmt_supply_mastdata,
+        lw_header       TYPE zdt_supply_mastdata_header.
+  DATA: lv_message TYPE string,
+        l_count    TYPE i,
+        l_packno   TYPE i,
+        s_line     TYPE i,
+        e_line     TYPE i,
+        l_ddate    TYPE char14.
+  DATA:lt_out  TYPE TABLE OF ty_out,
+       lt_roid TYPE lvc_t_roid,
+       lw_roid TYPE lvc_s_roid,
+       lr_alv  TYPE REF TO cl_gui_alv_grid.
+
+  CLEAR: lt_out.
+
+  IF p_front EQ 'X'.
+    CALL FUNCTION 'GET_GLOBALS_FROM_SLVC_FULLSCR'
+      IMPORTING
+        e_grid = lr_alv.
+    IF lr_alv IS BOUND.
+      CALL METHOD lr_alv->check_changed_data.
+
+      lr_alv->get_selected_rows( IMPORTING et_row_no = lt_roid ).
+    ENDIF.
+    LOOP AT lt_roid INTO lw_roid.
+      READ TABLE gt_out INTO DATA(lw_out) INDEX lw_roid-row_id.
+      IF sy-subrc = 0.
+        APPEND lw_out TO lt_out.
+      ENDIF.
+      CLEAR: lw_roid.
+    ENDLOOP.
+    CLEAR: lt_roid.
+  ELSE.
+    lt_out[] = gt_out[].
+  ENDIF.
+
+  CLEAR :s_line ,e_line ,l_packno.
+  IF lt_out[] IS  NOT INITIAL.
+    l_ddate = sy-datum && sy-uzeit.
+
+    LOOP AT lt_out INTO lw_out.
+      ADD 1 TO l_count.
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
+        EXPORTING
+          input  = lw_out-lifnr
+        IMPORTING
+          output = lw_out-lifnr.
+      MOVE-CORRESPONDING lw_out TO lw_header.
+      lw_header-zbhts = '3'.
+      lw_header-zzdqr = ''.
+      lw_header-dstus = '0'.
+      lw_header-ddate = l_ddate.
+      APPEND lw_header TO ls_output-mt_supply_mastdata-header.
+
+      IF l_count EQ p_size.
+        ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+        ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+        TRY.
+            CREATE OBJECT lo_proxy.
+            CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+              EXPORTING
+                output = ls_output.
+            s_line = s_line + l_count.
+
+            COMMIT WORK AND WAIT.
+          CATCH cx_ai_system_fault INTO lo_system_fault.
+            CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+          CATCH cx_root.
+            lv_message = '未知原因的下发失败'.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+        ENDTRY.
+
+        ADD 1 TO l_packno.
+        l_count = 0.
+        CLEAR: ls_output.
+        CLEAR:lv_message.
+      ENDIF.
+      CLEAR: lw_header.
+    ENDLOOP.
+
+    IF l_count > 0.
+      ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+      ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+      TRY.
+          CREATE OBJECT lo_proxy.
+          CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+            EXPORTING
+              output = ls_output.
+          s_line = s_line + l_count.
+
+          COMMIT WORK AND WAIT.
+        CATCH cx_ai_system_fault INTO lo_system_fault.
+
+          CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+        CATCH cx_root.
+
+          lv_message = '未知原因的下发失败'.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+      ENDTRY.
+
+      ADD 1 TO l_packno.
+      l_count = 0.
+      CLEAR: ls_output.
+      CLEAR:lv_message.
+    ENDIF.
+
+    MESSAGE s888(sabapdocu) WITH '发送了' && l_packno && '个数据包,' && '发送成功了' && s_line && '条，' && '失败了' && e_line && '条'.
+    CLEAR: l_count,l_packno.
+
+  ELSE.
+    MESSAGE s888(sabapdocu) WITH '没有可发送数据'.
+  ENDIF.
+ENDFORM.                   
+
+
+```
+
+
+
+
+
+
+
+
+
+## 十三、功能代码
+
+
+
+```tex
+
+创建采购申请 【Purchase Request】 PR  ME51N
+创建采购订单 【Purchase order】   PO  ME21N
+
+
+```
+
+
+
+![image-20200716165025498](C:\Users\Null\AppData\Roaming\Typora\typora-user-images\image-20200716165025498.png)
+
+
+
+TELF1
+
+TELF2
+
+LSTRAS
+
+REGSS
+
+PSTLZ
+
+PNAME1 
+
+TELFX
+
+PTELF1
+
+ZTERM
+
+ZZDQR
+
+KRAUS
+
+SORTL
+
+ZZJYPP
+
+ZZJYFW
+
+ZZYYZZ
+
+ZZQYLB
+
+ZZCBTZ
+
+ZZJSWZ
+
+ZZYJRQ
+
+
+
+```XML
+
+*&---------------------------------------------------------------------*
+*& Report  ZDMALL003
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zdmall003a.
+
+TABLES:lfa1.
+
+TYPES: BEGIN OF ty_out,
+         lifnr  TYPE lfa1-lifnr, "供应商
+         name1  TYPE lfa1-name1, "名称
+         ktokk  TYPE lfa1-ktokk, "供商类型
+         fityp  TYPE lfa1-fityp, "税类型
+         stceg  TYPE lfa1-stceg, "税号
+         actss  TYPE lfa1-actss, "状态
+         zzjyfs TYPE lfa1-zzjyfs,
+         stras  TYPE lfa1-stras,
+         stelf1 TYPE lfa1-telf1,
+         stelf2 TYPE lfa1-telf2,
+         stelfx TYPE lfa1-telfx,
+         ekgrp  TYPE lfm1-ekgrp,  "经营范围
+         minbw  TYPE lfm1-minbw,
+         plifz  TYPE lfm1-plifz,
+         kalsk  TYPE lfm1-kalsk,
+         zterm  TYPE lfm1-zterm,
+         lname  TYPE knvk-name1, "联系人
+         telf1  TYPE knvk-telf1, "联系人电话
+         bankl  TYPE lfbk-bankl,
+         bankn  TYPE lfbk-bankn,
+         koinh  TYPE lfbk-koinh,
+         banka  TYPE bnka-banka,
+         brnch  TYPE char100,    " BNKA-STRAS && BNKA-BRNCH
+       END OF ty_out,
+       BEGIN OF ty_lfa1,
+         lifnr       TYPE lfa1-lifnr, "供应商
+         name1       TYPE lfa1-name1, "名称
+         ktokk       TYPE lfa1-ktokk, "供商类型
+         fityp       TYPE lfa1-fityp, "税类型
+         ekgrp       TYPE lfm1-ekgrp,  "经营范围
+         stceg       TYPE lfa1-stceg, "税号
+         actss       TYPE lfa1-actss, "状态
+         zzjyfs      TYPE lfa1-zzjyfs,
+         minbw       TYPE lfm1-minbw,
+         plifz       TYPE lfm1-plifz,
+         kalsk       TYPE lfm1-kalsk,
+         stras       TYPE lfa1-stras,
+         stelf1      TYPE lfa1-telf1,
+         stelf2      TYPE lfa1-telf2,
+         stelfx      TYPE lfa1-telfx,
+         zterm       TYPE lfm1-zterm,
+*         adrnr    TYPE lfa1-adrnr,
+         lfa1_key    TYPE cdhdr-objectid,
+*         adrc_key TYPE cdhdr-objectid,
+         nochange(1) TYPE c,
+       END OF ty_lfa1,
+       BEGIN OF ty_lfbk,
+         lifnr TYPE lfbk-lifnr,
+         bankl TYPE lfbk-bankl,
+         bankn TYPE lfbk-bankn,
+         koinh TYPE lfbk-koinh,
+*         lfbk_key TYPE cdhdr-objectid,
+       END OF ty_lfbk,
+       BEGIN OF ty_bnka,
+         banks       TYPE bnka-banks,
+         bankl       TYPE bnka-bankl,
+         banka       TYPE bnka-banka,
+         brnch       TYPE bnka-brnch,
+         stras       TYPE bnka-stras,
+         bnka_key    TYPE cdhdr-objectid,
+         nochange(1) TYPE c,
+       END OF ty_bnka,
+       BEGIN OF ty_knvk,
+         parnr TYPE knvk-parnr,
+         name1 TYPE knvk-name1,
+         telf1 TYPE knvk-telf1,
+         lifnr TYPE knvk-lifnr,
+       END OF ty_knvk,
+       BEGIN OF ty_cdhdr,
+         objectclas TYPE cdhdr-objectclas,
+         objectid   TYPE cdhdr-objectid,
+         changenr   TYPE cdhdr-changenr,
+       END OF ty_cdhdr.
+DATA:gt_out TYPE TABLE OF ty_out.
+
+*----------------------------------------------------------------------*
+* Selection Screen
+*----------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE text-b01.
+PARAMETERS: p_front RADIOBUTTON GROUP rg1 DEFAULT 'X' USER-COMMAND uc01,
+            p_back  RADIOBUTTON GROUP rg1.
+SELECTION-SCREEN END OF BLOCK b1.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-b02.
+PARAMETERS: p_udate TYPE cdhdr-udate.
+SELECTION-SCREEN SKIP 1.
+SELECT-OPTIONS : s_lifnr FOR lfa1-lifnr.
+SELECT-OPTIONS : s_ktokk FOR lfa1-ktokk DEFAULT 'Z002'.
+SELECTION-SCREEN END OF BLOCK b2.
+
+SELECTION-SCREEN BEGIN OF BLOCK b3 WITH FRAME TITLE text-b03.
+PARAMETERS: p_size TYPE int4 OBLIGATORY DEFAULT 10000.
+SELECTION-SCREEN END OF BLOCK b3.
+
+START-OF-SELECTION.
+  PERFORM frm_main.
+
+END-OF-SELECTION.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_MAIN
+*&---------------------------------------------------------------------*
+FORM frm_main .
+  DATA: lt_lfa1  TYPE STANDARD TABLE OF ty_lfa1,
+        lt_lfbk  TYPE STANDARD TABLE OF ty_lfbk,
+        lt_knvk  TYPE STANDARD TABLE OF ty_knvk,
+        lt_bnka  TYPE STANDARD TABLE OF ty_bnka,
+        lt_cdhdr TYPE STANDARD TABLE OF ty_cdhdr,
+        lw_out   TYPE ty_out.
+  DATA: l_udate TYPE sy-datum.
+
+  SELECT a~lifnr a~name1 a~ktokk a~fityp b~ekgrp a~stceg a~actss a~zzjyfs b~minbw b~plifz
+         b~kalsk a~stras a~telf1 a~telf2 a~telfx b~zterm "a~adrnr
+    INTO TABLE lt_lfa1
+    FROM lfa1 AS a
+    INNER JOIN lfm1 AS b ON a~lifnr = b~lifnr
+    WHERE a~lifnr IN s_lifnr
+      AND a~ktokk IN s_ktokk
+      AND b~ekorg EQ 'P001'.
+  IF sy-subrc = 0.
+    SELECT lifnr bankl bankn koinh
+      INTO TABLE lt_lfbk
+      FROM lfbk
+      FOR ALL ENTRIES IN lt_lfa1
+      WHERE lifnr = lt_lfa1-lifnr
+        AND banks = 'CN'.
+    IF sy-subrc = 0.
+      SELECT banks bankl banka brnch stras
+        INTO TABLE lt_bnka
+        FROM bnka
+        FOR ALL ENTRIES IN lt_lfbk
+        WHERE banks = 'CN'
+          AND bankl = lt_lfbk-bankl.
+    ENDIF.
+
+    SELECT parnr name1 telf1 lifnr
+      FROM knvk
+      INTO TABLE lt_knvk
+      FOR ALL ENTRIES IN lt_lfa1
+      WHERE lifnr = lt_lfa1-lifnr.
+
+    SORT lt_knvk BY lifnr parnr.
+    DELETE ADJACENT DUPLICATES FROM lt_knvk COMPARING lifnr.
+
+    IF p_udate IS NOT INITIAL.
+      l_udate = p_udate - 1.
+
+      LOOP AT lt_lfa1 ASSIGNING FIELD-SYMBOL(<fs_lfa1>).
+        <fs_lfa1>-lfa1_key = <fs_lfa1>-lifnr.
+*        CONCATENATE 'BP' <fs_lfa1>-adrnr INTO <fs_lfa1>-adrc_key RESPECTING BLANKS.
+      ENDLOOP.
+      LOOP AT lt_bnka ASSIGNING FIELD-SYMBOL(<fs_bnka>).
+        CONCATENATE sy-mandt <fs_bnka>-banks <fs_bnka>-bankl INTO <fs_bnka>-bnka_key RESPECTING BLANKS.
+      ENDLOOP.
+
+      IF lt_lfa1[] IS NOT INITIAL.
+        SELECT objectclas objectid changenr
+          INTO TABLE lt_cdhdr
+          FROM cdhdr
+          FOR ALL ENTRIES IN lt_lfa1
+          WHERE objectid = lt_lfa1-lfa1_key
+            AND objectclas = 'KRED'
+            AND ( ( udate = l_udate AND utime >= '223000' ) OR ( udate = p_udate AND utime <= '223000' ) ).
+      ENDIF.
+
+      IF lt_bnka[] IS NOT INITIAL.
+        SELECT objectclas objectid changenr
+          APPENDING TABLE lt_cdhdr
+          FROM cdhdr
+          FOR ALL ENTRIES IN lt_bnka
+          WHERE objectid = lt_bnka-bnka_key
+            AND objectclas = 'BANK'
+            AND ( ( udate = l_udate AND utime >= '223000' ) OR ( udate = p_udate AND utime <= '223000' ) ).
+      ENDIF.
+
+      SORT: lt_cdhdr BY objectclas objectid.
+      LOOP AT lt_lfa1 ASSIGNING <fs_lfa1>.
+        READ TABLE lt_cdhdr TRANSPORTING NO FIELDS WITH KEY objectclas = 'KRED' objectid = <fs_lfa1>-lfa1_key BINARY SEARCH.
+        IF sy-subrc <> 0.
+          <fs_lfa1>-nochange = 'X'.
+        ENDIF.
+      ENDLOOP.
+
+      LOOP AT lt_bnka ASSIGNING <fs_bnka>.
+        READ TABLE lt_cdhdr TRANSPORTING NO FIELDS WITH KEY objectclas = 'BANK' objectid = <fs_bnka>-bnka_key BINARY SEARCH.
+        IF sy-subrc <> 0.
+          <fs_bnka>-nochange = 'X'.
+        ENDIF.
+      ENDLOOP.
+
+      CLEAR: lt_cdhdr.
+    ENDIF.
+
+    SORT: lt_lfa1 BY lifnr,
+          lt_lfbk BY lifnr bankl,
+          lt_knvk BY lifnr parnr,
+          lt_bnka BY banks bankl.
+
+    LOOP AT lt_lfa1 INTO DATA(lw_lfa1).
+
+      READ TABLE lt_knvk INTO DATA(lw_knvk) WITH KEY lifnr = lw_lfa1-lifnr BINARY SEARCH.
+      READ TABLE lt_lfbk INTO DATA(lw_lfbk) WITH KEY lifnr = lw_lfa1-lifnr BINARY SEARCH.
+      READ TABLE lt_bnka INTO DATA(lw_bnka) WITH KEY banks = 'CN' bankl = lw_lfbk-bankl BINARY SEARCH.
+
+      MOVE-CORRESPONDING lw_lfa1 TO lw_out.
+      lw_out-telf1 = lw_knvk-telf1.
+      lw_out-lname = lw_knvk-name1.
+      lw_out-bankl = lw_lfbk-bankl.
+      lw_out-bankn = lw_lfbk-bankn.
+      lw_out-koinh = lw_lfbk-koinh.
+      lw_out-banka = lw_bnka-banka.
+      lw_out-brnch = lw_bnka-stras && lw_bnka-brnch.
+
+      " 仅当BNKA和LFA1有修改时才下发
+      IF lw_bnka-nochange IS INITIAL OR lw_lfa1-nochange IS INITIAL.
+        APPEND lw_out TO gt_out.
+      ENDIF.
+
+      CLEAR: lw_lfa1,lw_knvk,lw_out,lw_lfbk,lw_bnka.
+    ENDLOOP.
+
+    IF p_front IS NOT INITIAL.
+      PERFORM frm_display.
+    ELSE.
+      PERFORM frm_transport .
+    ENDIF.
+  ELSE.
+    MESSAGE '没有符合条件的数据' TYPE 'S' DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_MAIN
+*&---------------------------------------------------------------------*
+*&      Form  FRM_DISPLAY
+*&---------------------------------------------------------------------*
+FORM frm_display .
+  DATA: lw_fieldcat   TYPE lvc_s_fcat,
+        lt_fieldcat   TYPE lvc_t_fcat,
+        ls_layout_lvc TYPE lvc_s_layo.
+
+  DEFINE add_field.
+    lw_fieldcat-fieldname = &1.
+    lw_fieldcat-scrtext_s = lw_fieldcat-scrtext_m = lw_fieldcat-reptext = lw_fieldcat-scrtext_l = &2.
+    lw_fieldcat-edit      = &3.
+    lw_fieldcat-no_zero   = &4.
+    lw_fieldcat-outputlen = &5.
+    IF &6 IS NOT INITIAL.
+      lw_fieldcat-ref_table = &6.
+      IF &7 IS INITIAL.
+        lw_fieldcat-ref_field = &1.
+      ELSE.
+        lw_fieldcat-ref_field = &7.
+      ENDIF.
+    ENDIF.
+    APPEND lw_fieldcat TO lt_fieldcat.
+    CLEAR: lw_fieldcat.
+  END-OF-DEFINITION.
+
+  add_field: 'LIFNR'        '供商编码'           '' ''   '10' 'LFA1' '' ,
+             'NAME1'        '供商名称'           '' ''   '35' 'LFA1' '' ,
+             'KTOKK'        '供商类型'           '' ''   '04' 'LFA1' '' ,
+             'FITYP'        '税类型'             '' ''   '02' 'LFA1' '' ,
+             'STCEG'        '纳税识别号'         '' ''   '20' 'LFA1' '' ,
+             'ACTSS'        '供应商状态'         '' ''   '03' 'LFA1' '' ,
+             'ZZJYFS'       '经营方式'           '' ''   '01' 'LFA1' '' ,
+             'STRAS'        '供应商地址'         '' ''   '35' 'LFA1' '' ,
+             'STELF1'       '供应商办公电话'     '' ''   '16' 'LFA1' '' ,
+             'STELF2'       '供应商手机'         '' ''   '16' 'LFA1' '' ,
+             'STELFX'       '供应商传真'         '' ''   '31' 'LFA1' '' ,
+             'EKGRP'        '经营范围'           '' ''   '03' 'LFM1' '' ,
+             'MINBW'        '最小起订金额'       '' ''   '20' 'LFM1' '' ,
+             'PLIFZ'        '默认订货日期'       '' ''   '03' 'LFM1' '' ,
+             'KALSK'        '允许手工改价'       '' ''   '04' 'LFM1' '' ,
+             'ZTERM'        '付款条件'           '' ''   '04' 'LFM1' '' ,
+             'LNAME'        '联系人'             '' ''   '35' 'LFA1' '' ,
+             'TELF1'        '联系人电话'         '' ''   '16' 'LFA1' '' ,
+             'BANKL'        '银行代码'           '' ''   '15' 'LFBK' '' ,
+             'BANKN'        '银行账号'           '' ''   '18' 'LFBK' '' ,
+             'KOINH'        '持有者'             '' ''   '60' 'LFBK' '' ,
+             'BANKA'        '银行名称'           '' ''   '60' 'BNKA' '' ,
+             'BRNCH'        '分行名称'           '' ''   '100' '' '' .
+
+  ls_layout_lvc-zebra        = 'X' .
+  ls_layout_lvc-cwidth_opt   = 'X' .    "列宽度自动根据内容优化
+  ls_layout_lvc-sel_mode = 'D'.
+  ls_layout_lvc-no_toolbar = 'X'.
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY_LVC'
+    EXPORTING
+      i_callback_program       = sy-repid
+      i_callback_pf_status_set = 'FRM_PF_STATUS'
+      i_callback_user_command  = 'FRM_USER_COMMAND'
+      is_layout_lvc            = ls_layout_lvc
+      it_fieldcat_lvc          = lt_fieldcat
+    TABLES
+      t_outtab                 = gt_out
+    EXCEPTIONS
+      program_error            = 1
+      OTHERS                   = 2.
+  IF sy-subrc <> 0.
+    MESSAGE ID sy-msgid TYPE 'S' NUMBER sy-msgno
+          WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 DISPLAY LIKE 'E'.
+  ENDIF.
+ENDFORM.                    " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+FORM frm_pf_status USING  extab TYPE slis_t_extab.
+  clear: extab,extab[].
+  SET PF-STATUS '1000' EXCLUDING extab.
+ENDFORM.
+*&---------------------------------------------------------------------*
+*&      Form  FRM_USER_COMMAND
+*&---------------------------------------------------------------------*
+FORM frm_user_command USING ucomm LIKE sy-ucomm
+                            selfield TYPE slis_selfield.
+
+  IF ucomm = 'SEND'.
+    PERFORM frm_transport .
+  ENDIF.
+
+  selfield-refresh = 'X'.
+  selfield-col_stable = 'X'.
+  selfield-row_stable = 'X'.
+ENDFORM.              " FRM_DISPLAY              " FRM_DISPLAY
+*&---------------------------------------------------------------------*
+*&      Form  FRM_TRANSPORT
+*&---------------------------------------------------------------------*
+FORM frm_transport .
+  DATA: lo_proxy        TYPE REF TO zco_si_supply_mastdata_out_asy,
+        lo_system_fault TYPE REF TO cx_ai_system_fault,
+        ls_output       TYPE zmt_supply_mastdata,
+        lw_header       TYPE zdt_supply_mastdata_header.
+  DATA: lv_message TYPE string,
+        l_count    TYPE i,
+        l_packno   TYPE i,
+        s_line     TYPE i,
+        e_line     TYPE i,
+        l_ddate    TYPE char14.
+  DATA:lt_out  TYPE TABLE OF ty_out,
+       lt_roid TYPE lvc_t_roid,
+       lw_roid TYPE lvc_s_roid,
+       lr_alv  TYPE REF TO cl_gui_alv_grid.
+
+  CLEAR: lt_out.
+
+  IF p_front EQ 'X'.
+    CALL FUNCTION 'GET_GLOBALS_FROM_SLVC_FULLSCR'
+      IMPORTING
+        e_grid = lr_alv.
+    IF lr_alv IS BOUND.
+      CALL METHOD lr_alv->check_changed_data.
+
+      lr_alv->get_selected_rows( IMPORTING et_row_no = lt_roid ).
+    ENDIF.
+    LOOP AT lt_roid INTO lw_roid.
+      READ TABLE gt_out INTO DATA(lw_out) INDEX lw_roid-row_id.
+      IF sy-subrc = 0.
+        APPEND lw_out TO lt_out.
+      ENDIF.
+      CLEAR: lw_roid.
+    ENDLOOP.
+    CLEAR: lt_roid.
+  ELSE.
+    lt_out[] = gt_out[].
+  ENDIF.
+
+  CLEAR :s_line ,e_line ,l_packno.
+  IF lt_out[] IS  NOT INITIAL.
+    l_ddate = sy-datum && sy-uzeit.
+
+    LOOP AT lt_out INTO lw_out.
+      ADD 1 TO l_count.
+      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
+        EXPORTING
+          input  = lw_out-lifnr
+        IMPORTING
+          output = lw_out-lifnr.
+      MOVE-CORRESPONDING lw_out TO lw_header.
+      lw_header-zbhts = '3'.
+      lw_header-zzdqr = ''.
+      lw_header-dstus = '0'.
+      lw_header-ddate = l_ddate.
+      APPEND lw_header TO ls_output-mt_supply_mastdata-header.
+
+      IF l_count EQ p_size.
+        ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+        ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+        TRY.
+            CREATE OBJECT lo_proxy.
+            CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+              EXPORTING
+                output = ls_output.
+            s_line = s_line + l_count.
+
+            COMMIT WORK AND WAIT.
+          CATCH cx_ai_system_fault INTO lo_system_fault.
+            CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+          CATCH cx_root.
+            lv_message = '未知原因的下发失败'.
+            MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+            e_line = e_line + l_count.
+        ENDTRY.
+
+        ADD 1 TO l_packno.
+        l_count = 0.
+        CLEAR: ls_output.
+        CLEAR:lv_message.
+      ENDIF.
+      CLEAR: lw_header.
+    ENDLOOP.
+
+    IF l_count > 0.
+      ls_output-mt_supply_mastdata-message_header-receiver = 'DMALL'.
+      ls_output-mt_supply_mastdata-message_header-data_count = l_count .
+      TRY.
+          CREATE OBJECT lo_proxy.
+          CALL METHOD lo_proxy->si_supply_mastdata_out_asyn
+            EXPORTING
+              output = ls_output.
+          s_line = s_line + l_count.
+
+          COMMIT WORK AND WAIT.
+        CATCH cx_ai_system_fault INTO lo_system_fault.
+
+          CONCATENATE lo_system_fault->errortext  '!' lo_system_fault->code INTO lv_message.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+        CATCH cx_root.
+
+          lv_message = '未知原因的下发失败'.
+          MESSAGE s888(sabapdocu) WITH lv_message DISPLAY LIKE 'E'.
+          e_line = e_line + l_count.
+      ENDTRY.
+
+      ADD 1 TO l_packno.
+      l_count = 0.
+      CLEAR: ls_output.
+      CLEAR:lv_message.
+    ENDIF.
+
+    MESSAGE s888(sabapdocu) WITH '发送了' && l_packno && '个数据包,' && '发送成功了' && s_line && '条，' && '失败了' && e_line && '条'.
+    CLEAR: l_count,l_packno.
+
+  ELSE.
+    MESSAGE s888(sabapdocu) WITH '没有可发送数据'.
+  ENDIF.
+ENDFORM.                    " FRM_TRANSPORT
+
+
+
+
+
+```
+
+
+
+
+
+
+
+lo_proxy	---> ZCO_SI_VENDER_INFO_ZZT_OUT_ASY,   zco_si_supply_mastdata_out_asy
+
+ls_output ------> ZMT_VENDER_INFO_ZZT ,,,zmt_supply_mastdata
+
+lw_header  ------------>ZDT_VENDER_INFO_ZZT_HEADER,,,zdt_supply_mastdata_header.
+
+
+
+
+
+ZDT_MESSAGE_HEADER-receiver
+
+
+
+```XML
+
+ITEM  
+	LIFNR   
+	KOINH
+	BANKA
+	BANKN
+	BKREF
+	STRAS
+	BRNCH
+
+
+
+```
+
+
+
+```XML
+ZZTYFS             A1
+EKGRP    M1 
+PNAME1	A1
+PTELF1	A1
+KALSK	M1
+PSTLZ	M1
+ZTERM   M1
+ZZCBTZ	A1
+ZZQYLB	A1
+ZZYYZZ	A1
+ZZJSWZ  A1
+ZZJYPP	A1
+ZZJYFW	A1
+
+
+
+NOID
+ISSUED_TIME
+CREATION_DATE
+
+
+
+LT_LFM1	                                   	[7209x5(28)]Standard Table
+LT_LFA1	                                   	[7641x24(716)]Standard Table
+LT_LFBK	                                   	[4674x5(246)]Standard Table
+LT_BNKA	                                   	[1910x6(482)]Standard Table
+LT_KNVK	                                   	[657x4(142)]Standard Table
+
+
+	  lw_out-Ptelf1 = lw_knvk-telf1.
+      lw_out-PName1 = lw_knvk-name1.
+
+      lw_out-bankn = lw_lfbk-bankn.
+      lw_out-koinh = lw_lfbk-koinh.
+  	  lw_out-BKREF = lw_lfbk-BKREF.
+
+
+      lw_out-banka = lw_bnka-banka.
+      lw_out-stras = lw_bnka-stras 
+	  lw_out-brnch = lw_bnka-brnch.
+
+                                   	CONTROLLER	                                   Table	                                   	Standard Table[0x2(62)]
+                                   	LIFNR	                                   	0		CString{1}
+                                   	KOINH	                                   	供应商2014123001	
+                                   	BANKA	                                   	中国工商银行		
+                                   	BANKN	                                   	5000023421123		
+                                   	BKREF	                                   			CString{0}
+                                   	STRAS	                                   			CString{0}
+                                   	BRNCH	                                   	大坪支行		
+
+```
+
+
+
+
+
+
 
